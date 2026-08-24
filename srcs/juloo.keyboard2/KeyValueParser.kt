@@ -277,5 +277,5 @@ object KeyValueParser
     throw ParseError(msg_.toString())
   }
 
-  class ParseError(msg: String) : Exception(msg)
+  public class ParseError(msg: String) : Exception(msg)
 }
