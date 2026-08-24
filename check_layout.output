@@ -68,7 +68,7 @@ latn_colemak: Some keys contain whitespaces, unexpected:  ́
 latn_colemak: Layout contains keys present in the bottom row, unexpected: ,, .
 latn_dvorak: Missing important key, missing: loc capslock
 latn_dvorak: Layout contains keys present in the bottom row, unexpected: ,, .
-latn_neo2: Layout redefines the bottom row but some important keys are missing, missing: loc switch_clipboard, loc switch_emoji
+latn_neo2: Layout redefines the bottom row but some important keys are missing, missing: loc switch_clipboard, loc switch_emoji, page_down, page_up
 latn_qwerty_apl: Layout contains keys present in the bottom row, unexpected: ,, .
 latn_qwerty_az: Layout contains keys present in the bottom row, unexpected: ,, .
 latn_qwerty_bqn: Layout contains keys present in the bottom row, unexpected: ,, .
