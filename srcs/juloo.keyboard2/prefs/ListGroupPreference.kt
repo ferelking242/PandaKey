@@ -225,7 +225,7 @@ abstract class ListGroupPreference<E> : PreferenceGroup
     }
   }
 
-  inner class AddButton(ctx: Context) : Preference(ctx)
+  open inner class AddButton(ctx: Context) : Preference(ctx)
   {
     init
     {

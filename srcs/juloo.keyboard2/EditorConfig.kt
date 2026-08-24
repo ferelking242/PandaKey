@@ -5,6 +5,7 @@ import android.os.Build.VERSION
 import android.text.InputType
 import android.text.TextUtils
 import android.view.inputmethod.EditorInfo
+import juloo.keyboard2.suggestions.CandidatesView
 
 class EditorConfig
 {

@@ -49,7 +49,8 @@ class FoldStateTracker(context: Context)
     {
       val old = _foldingFeature
       _foldingFeature = null
-      for (feature in newLayoutInfo.getDisplayFeatures())
+      val features: List<DisplayFeature> = newLayoutInfo.getDisplayFeatures()
+      for (feature in features)
       {
         if (feature is FoldingFeature)
         {
