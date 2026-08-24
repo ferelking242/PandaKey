@@ -1,32 +1,121 @@
 arab_alt: Layout includes some ASCII punctuation but not all, missing: !, ", ', +, -, /, :, ;, <, =, >, ?, [, \, ], _, |, ~
+arab_alt: Layout contains keys present in the bottom row, unexpected: ,, .
 arab_hamvaj_tly: Layout includes some ASCII punctuation but not all, missing: ", %, ', ,, /, ;, <, =, >, ?, [, \, ], _, `, {, |, }
+arab_hamvaj_tly: Layout contains keys present in the bottom row, unexpected: .
 arab_pc: Layout includes some ASCII punctuation but not all, missing: !, ', +, ;, ?, \, |
+arab_pc: Layout contains keys present in the bottom row, unexpected: ,, .
 arab_pc_ckb: Layout includes some ASCII punctuation but not all, missing: ", %, ', +, ,, ;, <, =, >, ?, `, |, ~
+arab_pc_ckb: Layout contains keys present in the bottom row, unexpected: .
 arab_pc_ckb_fa: Layout includes some ASCII punctuation but not all, missing: ", #, $, %, &, ', ,, /, ;, ?, @, \, ^, `, |, ~
+arab_pc_ckb_fa: Layout contains keys present in the bottom row, unexpected: .
 arab_pc_hindu: Layout includes some ASCII punctuation but not all, missing: !, ', +, ;, ?, \, |
+arab_pc_hindu: Layout contains keys present in the bottom row, unexpected: ,, .
 arab_pc_ir: Layout includes some ASCII punctuation but not all, missing: ", %, ', ,, /, ;, <, =, >, ?, [, \, ], `, {, |, }
+arab_pc_ir: Layout contains keys present in the bottom row, unexpected: .
 armn_cpbsmo: Layout includes some ASCII punctuation but not all, missing: !, ", #, $, %, &, ', *, +, <, =, >, ?, @, [, ], ^, `, {, }, ~
+armn_cpbsmo: Layout contains keys present in the bottom row, unexpected: ,, .
 armn_kvertc: Layout includes some ASCII punctuation but not all, missing: !, ", #, $, %, &, ', *, +, <, =, >, ?, @, [, ], ^, `, {, }, ~
+armn_kvertc: Layout contains keys present in the bottom row, unexpected: ,, .
 beng_assamese: Layout includes some ASCII punctuation but not all, missing: #, $, %, &, ', *, +, -, /, :, ;, <, =, >, ?, [, \, ], ^, _, `, {, |, }, ~
+beng_assamese: Layout contains keys present in the bottom row, unexpected: ,, .
 beng_national: Layout includes some ASCII punctuation but not all, missing: $
+beng_national: Layout contains keys present in the bottom row, unexpected: ,, .
 beng_provat: Layout includes some ASCII punctuation but not all, missing: $, &, *, ., /, <, >, [, \, ], `, {, |, }
+beng_provat: Layout contains keys present in the bottom row, unexpected: ,
+cyrl_fcuzhen_mn: Layout contains keys present in the bottom row, unexpected: ,, .
+cyrl_jcuken_as: Layout contains keys present in the bottom row, unexpected: ,, .
+cyrl_jcuken_kk: Layout contains keys present in the bottom row, unexpected: ,, .
+cyrl_jcuken_ru: Layout contains keys present in the bottom row, unexpected: ,, .
+cyrl_jcuken_uk: Layout contains keys present in the bottom row, unexpected: ,, .
 cyrl_jiuken: Layout includes some ASCII punctuation but not all, missing: #, $, &, ', *, +, <, =, >, @, [, ], ^, _, `, {, }, ~
+cyrl_jiuken: Layout contains keys present in the bottom row, unexpected: ,, .
 cyrl_lynyertdz_mk: Layout includes some ASCII punctuation but not all, missing: "
+cyrl_lynyertdz_mk: Layout contains keys present in the bottom row, unexpected: ,, .
+cyrl_lynyertz_sr: Layout contains keys present in the bottom row, unexpected: ,, .
+cyrl_ueishsht: Layout contains keys present in the bottom row, unexpected: ,, .
 cyrl_yaverti: Layout includes some ASCII punctuation but not all, missing: ~
+cyrl_yaverti: Layout contains keys present in the bottom row, unexpected: ,, .
 cyrl_yawerty: Layout includes some ASCII punctuation but not all, missing: #, $, &, ', *, <, >, @, [, ], ^, `, {, }, ~
+cyrl_yawerty: Layout contains keys present in the bottom row, unexpected: ,, .
+cyrl_yqukeng_tj: Layout contains keys present in the bottom row, unexpected: ,, .
 cyrl_yxukeng_os: Layout includes some ASCII punctuation but not all, missing: ", #, $, &, ', @, [, ], ~
+cyrl_yxukeng_os: Layout contains keys present in the bottom row, unexpected: ,, .
 deva_alt: Layout includes some ASCII punctuation but not all, missing: #, $, %, &, ', (, ), *, +, ., /, :, <, =, >, [, \, ], ^, _, `, {, |, }, ~
+deva_alt: Layout contains keys present in the bottom row, unexpected: ,
 deva_inscript: Layout includes some ASCII punctuation but not all, missing: ", $, ', ^, _, `, |
+deva_inscript: Layout contains keys present in the bottom row, unexpected: ,, .
+deva_phonetic_in: Layout contains keys present in the bottom row, unexpected: ,, .
+georgian_mes: Layout contains keys present in the bottom row, unexpected: ,, .
+georgian_qwerty: Layout contains keys present in the bottom row, unexpected: ,, .
+grek_qwerty: Layout contains keys present in the bottom row, unexpected: ,, .
+guj_phonetic_in: Layout contains keys present in the bottom row, unexpected: ,, .
+hang_dubeolsik_kr: Layout contains keys present in the bottom row, unexpected: ,, .
 hebr_1_il: Layout includes some ASCII punctuation but not all, missing: (, ), <, >, [, ], {, }
+hebr_1_il: Layout contains keys present in the bottom row, unexpected: ,, .
 hebr_2_il: Layout includes some ASCII punctuation but not all, missing: (, ), <, >, [, ], {, }
+hebr_2_il: Layout contains keys present in the bottom row, unexpected: ,, .
 kann_kannada: Layout includes some ASCII punctuation but not all, missing: #, $, %, (, ), *, +, /, <, =, >, [, \, ], ^, `, {, |, }, ~
+kann_kannada: Layout contains keys present in the bottom row, unexpected: ,, .
 latin_kbdtuf_tr: Layout includes some ASCII punctuation but not all, missing: $
 latin_kbdtuf_tr: These keys are now added automatically, unexpected: f11_placeholder, f12_placeholder
 latin_kbdtuf_tr: Missing programming keys, missing: loc esc, loc tab
+latin_kbdtuf_tr: Layout contains keys present in the bottom row, unexpected: ,, .
+latn_azerty_be: Layout contains keys present in the bottom row, unexpected: ,, .
+latn_azerty_fr: Layout contains keys present in the bottom row, unexpected: ,, .
+latn_bepo_fr: Layout contains keys present in the bottom row, unexpected: ,, .
+latn_bone: Layout contains keys present in the bottom row, unexpected: ,, .
 latn_colemak: Some keys contain whitespaces, unexpected:  ́
+latn_colemak: Layout contains keys present in the bottom row, unexpected: ,, .
 latn_dvorak: Missing important key, missing: loc capslock
-latn_neo2: Layout redefines the bottom row but some important keys are missing, missing: loc switch_clipboard
+latn_dvorak: Layout contains keys present in the bottom row, unexpected: ,, .
+latn_neo2: Layout redefines the bottom row but some important keys are missing, missing: loc switch_clipboard, loc switch_emoji
+latn_qwerty_apl: Layout contains keys present in the bottom row, unexpected: ,, .
+latn_qwerty_az: Layout contains keys present in the bottom row, unexpected: ,, .
+latn_qwerty_bqn: Layout contains keys present in the bottom row, unexpected: ,, .
+latn_qwerty_br: Layout contains keys present in the bottom row, unexpected: ,, .
+latn_qwerty_cy: Layout contains keys present in the bottom row, unexpected: ,, .
+latn_qwerty_cz: Layout contains keys present in the bottom row, unexpected: ,, .
+latn_qwerty_da: Layout contains keys present in the bottom row, unexpected: ,, .
+latn_qwerty_es: Layout contains keys present in the bottom row, unexpected: ,, .
+latn_qwerty_et: Layout contains keys present in the bottom row, unexpected: ,, .
+latn_qwerty_fi: Layout contains keys present in the bottom row, unexpected: ,, .
+latn_qwerty_ga: Layout contains keys present in the bottom row, unexpected: ,, .
+latn_qwerty_gb: Layout contains keys present in the bottom row, unexpected: ,, .
+latn_qwerty_haw: Layout contains keys present in the bottom row, unexpected: ,, .
+latn_qwerty_hu: Layout contains keys present in the bottom row, unexpected: ,, .
+latn_qwerty_is: Layout contains keys present in the bottom row, unexpected: ,, .
+latn_qwerty_jp: Layout contains keys present in the bottom row, unexpected: ,, .
+latn_qwerty_kk: Layout contains keys present in the bottom row, unexpected: ,, .
+latn_qwerty_lt: Layout contains keys present in the bottom row, unexpected: ,, .
+latn_qwerty_lv: Layout contains keys present in the bottom row, unexpected: ,, .
+latn_qwerty_mt: Layout contains keys present in the bottom row, unexpected: ,, .
+latn_qwerty_no: Layout contains keys present in the bottom row, unexpected: ,, .
+latn_qwerty_pl: Layout contains keys present in the bottom row, unexpected: ,, .
+latn_qwerty_ro: Layout contains keys present in the bottom row, unexpected: ,, .
+latn_qwerty_se: Layout contains keys present in the bottom row, unexpected: ,, .
+latn_qwerty_sk: Layout contains keys present in the bottom row, unexpected: ,, .
+latn_qwerty_sr: Layout contains keys present in the bottom row, unexpected: ,, .
+latn_qwerty_tly: Layout contains keys present in the bottom row, unexpected: ,, .
+latn_qwerty_tr: Layout contains keys present in the bottom row, unexpected: ,, .
+latn_qwerty_us: Layout contains keys present in the bottom row, unexpected: ,, .
+latn_qwerty_uz: Layout contains keys present in the bottom row, unexpected: ,, .
+latn_qwerty_vi: Layout contains keys present in the bottom row, unexpected: ,, .
+latn_qwertz: Layout contains keys present in the bottom row, unexpected: ,, .
+latn_qwertz_cz: Layout contains keys present in the bottom row, unexpected: ,, .
+latn_qwertz_cz_diacritics: Layout contains keys present in the bottom row, unexpected: ,, .
 latn_qwertz_cz_multifunctional: Layout includes some ASCII punctuation but not all, missing: `
+latn_qwertz_cz_multifunctional: Layout contains keys present in the bottom row, unexpected: ,, .
+latn_qwertz_de: Layout contains keys present in the bottom row, unexpected: ,, .
+latn_qwertz_fr_ch: Layout contains keys present in the bottom row, unexpected: ,, .
+latn_qwertz_hu: Layout contains keys present in the bottom row, unexpected: ,, .
 latn_qwertz_sk: Layout includes some ASCII punctuation but not all, missing: `
+latn_qwertz_sk: Layout contains keys present in the bottom row, unexpected: ,, .
+latn_qwertz_sq: Layout contains keys present in the bottom row, unexpected: ,, .
 latn_qzerty_it: Layout includes some ASCII punctuation but not all, missing: #, $, \, `, ~
+latn_qzerty_it: Layout contains keys present in the bottom row, unexpected: ,, .
+latn_workman_us: Layout contains keys present in the bottom row, unexpected: ,, .
+shaw_imperial_en: Layout contains keys present in the bottom row, unexpected: ,, .
+sinhala_phonetic: Layout contains keys present in the bottom row, unexpected: ,, .
+tamil_default: Layout contains keys present in the bottom row, unexpected: ,, .
 urdu_phonetic_ur: Layout includes some ASCII punctuation but not all, missing: <, >, ?, `, |, ~
+urdu_phonetic_ur: Layout contains keys present in the bottom row, unexpected: ,, .
