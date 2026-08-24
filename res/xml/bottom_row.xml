@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Samsung-style bottom row: symbols, globe, comma, space, period, enter -->
+<!-- Samsung-style bottom row with page navigation on space bar -->
 <row height="0.95">
+  <!-- !#1: switch to symbols, long press = greek/math, swipe up = emoji -->
   <key width="1.5" role="action" key0="switch_numeric" key1="loc switch_greekmath" key4="loc switch_emoji"/>
+  <!-- Globe: change method, swipe up = clipboard, swipe up-right = settings -->
   <key width="1.1" role="action" key0="loc change_method" key1="loc switch_clipboard" key2="config"/>
-  <key width="1.0" role="action" key0=","/>
-  <key width="5.0" role="space_bar" key0="space" key7="switch_forward" key8="switch_backward" key5="cursor_left" key6="cursor_right"/>
-  <key width="1.0" role="action" key0="."/>
+  <!-- Comma: comma, swipe up = page_up -->
+  <key width="1.0" role="action" key0="," key7="page_up"/>
+  <!-- Space bar: space, slider = cursor left/right, swipe up = page_up, swipe down = page_down -->
+  <key width="5.0" role="space_bar" key0="space" key5="cursor_left" key6="cursor_right" key7="page_up" key8="page_down"/>
+  <!-- Period: period, swipe up = page_down -->
+  <key width="1.0" role="action" key0="." key8="page_down"/>
+  <!-- Enter/Search: enter, swipe up = voice, swipe up-right = action -->
   <key width="1.5" role="action" key0="enter" key1="loc voice_typing" key2="action"/>
 </row>

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Samsung toolbar: 6 icons above keyboard, hidden when candidates visible -->
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:id="@+id/keyboard_toolbar"
+  android:layout_width="match_parent"
+  android:layout_height="44dp"
+  android:orientation="horizontal"
+  android:gravity="center_vertical"
+  android:paddingHorizontal="4dp"
+  android:background="?attr/colorKeyboard">
+
+  <!-- 1. Cursor move -->
+  <TextView
+    android:id="@+id/tb_cursor"
+    android:layout_width="0dp"
+    android:layout_height="40dp"
+    android:layout_weight="1"
+    android:gravity="center"
+    android:text="➍"
+    android:textSize="18sp"
+    android:textColor="#98989D"
+    android:background="?selectableItemBackgroundBorderless"/>
+
+  <!-- 2. Text select -->
+  <TextView
+    android:id="@+id/tb_select"
+    android:layout_width="0dp"
+    android:layout_height="40dp"
+    android:layout_weight="1"
+    android:gravity="center"
+    android:text="T"
+    android:textSize="18sp"
+    android:textStyle="bold"
+    android:textColor="#98989D"
+    android:background="?selectableItemBackgroundBorderless"/>
+
+  <!-- 3. Clipboard -->
+  <TextView
+    android:id="@+id/tb_clipboard"
+    android:layout_width="0dp"
+    android:layout_height="40dp"
+    android:layout_weight="1"
+    android:gravity="center"
+    android:text="❐"
+    android:textSize="18sp"
+    android:textColor="#98989D"
+    android:background="?selectableItemBackgroundBorderless"/>
+
+  <!-- 4. Translate -->
+  <TextView
+    android:id="@+id/tb_translate"
+    android:layout_width="0dp"
+    android:layout_height="40dp"
+    android:layout_weight="1"
+    android:gravity="center"
+    android:text="A"
+    android:textSize="16sp"
+    android:textStyle="bold"
+    android:textColor="#98989D"
+    android:background="?selectableItemBackgroundBorderless"/>
+
+  <!-- 5. Keyboard switch -->
+  <TextView
+    android:id="@+id/tb_keyboard"
+    android:layout_width="0dp"
+    android:layout_height="40dp"
+    android:layout_weight="1"
+    android:gravity="center"
+    android:text="⌨"
+    android:textSize="18sp"
+    android:textColor="#98989D"
+    android:background="?selectableItemBackgroundBorderless"/>
+
+  <!-- 6. More (3 dots) -->
+  <TextView
+    android:id="@+id/tb_more"
+    android:layout_width="0dp"
+    android:layout_height="40dp"
+    android:layout_weight="1"
+    android:gravity="center"
+    android:text="⋮"
+    android:textSize="20sp"
+    android:textColor="#98989D"
+    android:background="?selectableItemBackgroundBorderless"/>
+
+</LinearLayout>

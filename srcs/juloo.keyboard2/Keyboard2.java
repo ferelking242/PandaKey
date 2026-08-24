@@ -41,6 +41,7 @@ public class Keyboard2 extends InputMethodService
   private ViewGroup _keyboard_container_view;
   private Keyboard2View _keyboard_layout_view;
   private CandidatesView _candidates_view;
+  private View _toolbar_view;
   private Suggestions _suggestions;
   private KeyEventHandler _keyeventhandler;
   /** If not 'null', the layout to use instead of [_config.current_layout]. */
@@ -163,6 +164,39 @@ public class Keyboard2 extends InputMethodService
     _keyboard_container_view = (ViewGroup)inflate_view(R.layout.keyboard);
     _keyboard_layout_view = (Keyboard2View)_keyboard_container_view.findViewById(R.id.keyboard_view);
     _candidates_view = (CandidatesView)_keyboard_container_view.findViewById(R.id.candidates_view);
+    _toolbar_view = _keyboard_container_view.findViewById(R.id.keyboard_toolbar);
+    setup_toolbar();
+  }
+
+  private void setup_toolbar()
+  {
+    if (_toolbar_view == null) return;
+    // Clipboard button -> switch to clipboard pane
+    View clipBtn = _toolbar_view.findViewById(R.id.tb_clipboard);
+    if (clipBtn != null) clipBtn.setOnClickListener(v -> {
+      if (_clipboard_pane == null)
+        _clipboard_pane = (ViewGroup)inflate_view(R.layout.clipboard_pane);
+      setInputView(_clipboard_pane);
+    });
+    // More button -> open settings
+    View moreBtn = _toolbar_view.findViewById(R.id.tb_more);
+    if (moreBtn != null) moreBtn.setOnClickListener(v ->
+      start_activity(SettingsActivity.class));
+    // Keyboard switch button -> show picker
+    View kbBtn = _toolbar_view.findViewById(R.id.tb_keyboard);
+    if (kbBtn != null) kbBtn.setOnClickListener(v ->
+      get_imm().showInputMethodPicker());
+  }
+
+  /** Toggle toolbar visibility: hide when candidates are showing. */
+  private void refresh_toolbar()
+  {
+    if (_toolbar_view == null) return;
+    boolean show_candidates =
+      _config.suggestions_enabled
+      && _config.editor_config.should_show_candidates_view
+      && !_config.split_layout;
+    _toolbar_view.setVisibility(show_candidates ? View.GONE : View.VISIBLE);
   }
 
   InputMethodManager get_imm()
@@ -221,6 +255,7 @@ public class Keyboard2 extends InputMethodService
       _keyeventhandler.dictionary_changed();
     }
     _candidates_view.setVisibility(should_show ? View.VISIBLE : View.GONE);
+    refresh_toolbar();
   }
 
   /** Might re-create the keyboard view. [_keyboard_layout_view.setKeyboard()] and

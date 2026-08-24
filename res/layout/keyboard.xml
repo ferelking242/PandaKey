@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:hardwareAccelerated="false" android:orientation="vertical" android:background="?attr/colorKeyboard">
+  <!-- Toolbar: visible when idle, hidden when candidates shown -->
+  <include layout="@layout/keyboard_toolbar"/>
   <juloo.keyboard2.suggestions.CandidatesView android:id="@+id/candidates_view" style="@style/candidates_view">
     <TextView android:id="@+id/candidates_emoji" style="@style/candidates_emoji"/>
     <TextView android:id="@+id/candidates_left" style="@style/candidates_item"/>
