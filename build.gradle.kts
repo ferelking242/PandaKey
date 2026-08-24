@@ -1,8 +1,10 @@
 import com.android.build.gradle.internal.api.BaseVariantOutputImpl
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import java.io.FileOutputStream
 
 plugins {
   id("com.android.application") version "8.13.2"
+  id("org.jetbrains.kotlin.android") version "2.2.20"
 }
 
 dependencies {
@@ -28,12 +30,14 @@ android {
     named("main") {
       manifest.srcFile("AndroidManifest.xml")
       java.srcDirs("srcs/juloo.keyboard2", "vendor/cdict/java/juloo.cdict")
+      kotlin.srcDirs("srcs/juloo.keyboard2")
       res.srcDirs("res", "build/generated-resources")
       assets.srcDirs("assets")
     }
 
     named("test") {
       java.srcDirs("test")
+      kotlin.srcDirs("test")
     }
   }
 
@@ -92,6 +96,12 @@ android {
   compileOptions {
     sourceCompatibility = JavaVersion.VERSION_1_8
     targetCompatibility = JavaVersion.VERSION_1_8
+  }
+}
+
+kotlin {
+  compilerOptions {
+    jvmTarget.set(JvmTarget.JVM_1_8)
   }
 }
 
