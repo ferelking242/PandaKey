@@ -102,7 +102,16 @@
       android:textColorHint="#636366"
       android:paddingHorizontal="16dp"
       android:textSize="16sp"
-      android:layout_marginBottom="24dp"/>
+      android:layout_marginBottom="8dp"/>
+
+    <TextView
+      android:id="@+id/launcher_tryhere_text"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:textColor="#4A90D9"
+      android:textSize="14sp"
+      android:gravity="center"
+      android:layout_marginBottom="16dp"/>
 
     <!-- Animations -->
     <LinearLayout style="@style/anim_box">
