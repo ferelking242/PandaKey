@@ -423,7 +423,12 @@ public class Keyboard2View extends View
       if (flags != -1)
       {
         if ((flags & Pointers.FLAG_P_LOCKED) != 0)
+        {
+          // Shift locked → blue; Ctrl/Alt/Fn/Meta locked → green
+          if (k.equals(KeyValue.SHIFT))
+            return _theme.activatedColor;
           return _theme.lockedColor;
+        }
         return _theme.activatedColor;
       }
       return _theme.pressedColor;
