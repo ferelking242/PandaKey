@@ -20,7 +20,7 @@
     android:text="➍"
     android:textSize="18sp"
     android:textColor="#98989D"
-    android:background="?selectableItemBackgroundBorderless"/>
+    android:background="@android:color/transparent"/>
 
   <!-- 2. Text select -->
   <TextView
@@ -33,7 +33,7 @@
     android:textSize="18sp"
     android:textStyle="bold"
     android:textColor="#98989D"
-    android:background="?selectableItemBackgroundBorderless"/>
+    android:background="@android:color/transparent"/>
 
   <!-- 3. Clipboard -->
   <TextView
@@ -45,7 +45,7 @@
     android:text="❐"
     android:textSize="18sp"
     android:textColor="#98989D"
-    android:background="?selectableItemBackgroundBorderless"/>
+    android:background="@android:color/transparent"/>
 
   <!-- 4. Translate -->
   <TextView
@@ -58,7 +58,7 @@
     android:textSize="16sp"
     android:textStyle="bold"
     android:textColor="#98989D"
-    android:background="?selectableItemBackgroundBorderless"/>
+    android:background="@android:color/transparent"/>
 
   <!-- 5. Keyboard switch -->
   <TextView
@@ -70,7 +70,7 @@
     android:text="⌨"
     android:textSize="18sp"
     android:textColor="#98989D"
-    android:background="?selectableItemBackgroundBorderless"/>
+    android:background="@android:color/transparent"/>
 
   <!-- 6. More (3 dots) -->
   <TextView
@@ -82,6 +82,6 @@
     android:text="⋮"
     android:textSize="20sp"
     android:textColor="#98989D"
-    android:background="?selectableItemBackgroundBorderless"/>
+    android:background="@android:color/transparent"/>
 
 </LinearLayout>
