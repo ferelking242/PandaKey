@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PandaKey — Samsung Dark Keyboard Preview</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: #000; font-family: -apple-system, 'Roboto', sans-serif; display: flex; flex-direction: column; height: 100vh; overflow: hidden; }
+
+/* App mockup */
+.app { flex: 1; background: #1a1a2e; padding: 16px; display: flex; flex-direction: column; }
+.app-bar { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+.app-bar .avatar { width: 40px; height: 40px; border-radius: 50%; background: #4A90D9; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 18px; }
+.app-bar .title { color: #fff; font-size: 16px; font-weight: 500; }
+.app-bar .subtitle { color: #8E8E93; font-size: 12px; }
+.messages { flex: 1; display: flex; flex-direction: column; gap: 8px; overflow-y: auto; }
+.msg { max-width: 75%; padding: 10px 14px; border-radius: 18px; font-size: 15px; line-height: 1.4; }
+.msg.in { background: #2C2C2E; color: #fff; align-self: flex-start; border-bottom-left-radius: 4px; }
+.msg.out { background: #4A90D9; color: #fff; align-self: flex-end; border-bottom-right-radius: 4px; }
+.input-bar { display: flex; align-items: center; gap: 8px; padding: 8px 0; }
+.input-bar input { flex: 1; background: #2C2C2E; border: none; border-radius: 20px; padding: 10px 16px; color: #fff; font-size: 15px; outline: none; }
+.input-bar .send { width: 40px; height: 40px; border-radius: 50%; background: #4A90D9; border: none; color: #fff; font-size: 18px; cursor: pointer; }
+
+/* Keyboard */
+.keyboard { background: #1C1C1E; padding: 4px 2px 0; user-select: none; }
+
+/* Suggestion bar */
+.suggestions { display: flex; align-items: center; height: 42px; padding: 0 8px; gap: 4px; background: #1C1C1E; border-bottom: 0.5px solid #38383A; }
+.suggestion { flex: 1; text-align: center; color: #fff; font-size: 15px; padding: 8px 4px; border-radius: 6px; cursor: pointer; }
+.suggestion:active { background: #3A3A3C; }
+.suggestion.more { color: #8E8E93; flex: 0 0 30px; }
+
+/* Toolbar */
+.toolbar { display: flex; align-items: center; justify-content: space-around; height: 42px; padding: 0 12px; background: #1C1C1E; border-bottom: 0.5px solid #38383A; }
+.toolbar-icon { width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; border-radius: 8px; color: #8E8E93; font-size: 18px; cursor: pointer; }
+.toolbar-icon:active { background: #3A3A3C; color: #fff; }
+.toolbar-icon.active { color: #4A90D9; }
+
+/* Key rows */
+.row { display: flex; justify-content: center; gap: 5px; padding: 4px 3px; }
+.key { height: 46px; min-width: 32px; flex: 1; max-width: 42px; background: #3A3A3C; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 22px; font-weight: 400; cursor: pointer; transition: background 0.08s, transform 0.08s; position: relative; }
+.key:active, .key.pressed { background: #545456; transform: scale(0.95); }
+.key.wide { flex: 1.5; max-width: 60px; }
+.key.space { flex: 5; max-width: none; font-size: 13px; color: #8E8E93; letter-spacing: 0.5px; }
+.key.action { background: #2C2C2E; font-size: 16px; }
+.key.shift { font-size: 20px; }
+.key.shift.active { background: #4A90D9; color: #fff; }
+.key.modifier.active { background: #1a5c2a; color: #30D158; }
+.key.enter { background: #4A90D9; max-width: 52px; }
+.key.backspace { font-size: 18px; }
+.key.sublabel { font-size: 10px; position: absolute; bottom: 3px; color: #8E8E93; }
+
+/* Number row */
+.number-row .key { height: 40px; font-size: 20px; background: #2C2C2E; }
+.number-row .key:active { background: #48484A; }
+
+/* Status bar */
+.status-bar { display: flex; align-items: center; justify-content: space-between; padding: 4px 16px; background: #000; color: #fff; font-size: 12px; height: 28px; }
+.status-bar .time { font-weight: 600; }
+.status-bar .icons { display: flex; gap: 6px; }
+
+/* Modifier indicator */
+.mod-indicator { display: none; align-items: center; justify-content: center; height: 28px; background: #1a5c2a; color: #30D158; font-size: 12px; font-weight: 600; letter-spacing: 1px; }
+.mod-indicator.visible { display: flex; }
+
+/* Clipboard bar */
+.clipboard-bar { display: none; align-items: center; height: 42px; padding: 0 12px; background: #1C1C1E; border-bottom: 0.5px solid #38383A; gap: 8px; }
+.clipboard-bar.visible { display: flex; }
+.clipboard-bar .clip-text { flex: 1; color: #fff; font-size: 14px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.clipboard-bar .clip-close { color: #8E8E93; font-size: 18px; cursor: pointer; }
+</style>
+</head>
+<body>
+
+<!-- Status Bar -->
+<div class="status-bar">
+  <span class="time">18:43</span>
+  <span class="icons">📶 🔋</span>
+</div>
+
+<!-- App Mockup -->
+<div class="app">
+  <div class="app-bar">
+    <div class="avatar">💬</div>
+    <div>
+      <div class="title">PandaKey Chat</div>
+      <div class="subtitle">en ligne</div>
+    </div>
+  </div>
+  <div class="messages">
+    <div class="msg in">Salut ! Teste le nouveau clavier 🐼</div>
+    <div class="msg out">Ok j'essaie Samsung Dark theme</div>
+    <div class="msg in">Super les touches arrondies !</div>
+  </div>
+  <div class="input-bar">
+    <input type="text" id="textInput" placeholder="Message" readonly>
+    <button class="send">➤</button>
+  </div>
+</div>
+
+<!-- Keyboard -->
+<div class="keyboard" id="keyboard">
+  <!-- Modifier indicator -->
+  <div class="mod-indicator" id="modIndicator">CTRL ACTIF</div>
+
+  <!-- Suggestion bar -->
+  <div class="suggestions" id="suggestions">
+    <div class="suggestion" onclick="insertWord(this)">Bonjour</div>
+    <div class="suggestion" onclick="insertWord(this)">Bonsoir</div>
+    <div class="suggestion" onclick="insertWord(this)">Bonsoir</div>
+    <div class="suggestion more">⋯</div>
+  </div>
+
+  <!-- Toolbar -->
+  <div class="toolbar">
+    <div class="toolbar-icon" title="Cursor">◇</div>
+    <div class="toolbar-icon" title="Text Select">⌊⌋</div>
+    <div class="toolbar-icon" title="Clipboard" onclick="toggleClipboard()">📋</div>
+    <div class="toolbar-icon" title="Translate">🌐</div>
+    <div class="toolbar-icon" title="Keyboard">⌨</div>
+    <div class="toolbar-icon" title="More">⋯</div>
+  </div>
+
+  <!-- Clipboard bar -->
+  <div class="clipboard-bar" id="clipboardBar">
+    <span style="color:#8E8E93">📎</span>
+    <span class="clip-text">Coller</span>
+    <span class="clip-close" onclick="toggleClipboard()">✕</span>
+  </div>
+
+  <!-- Number row -->
+  <div class="row number-row" id="numberRow">
+    <div class="key" data-key="1">1</div>
+    <div class="key" data-key="2">2</div>
+    <div class="key" data-key="3">3</div>
+    <div class="key" data-key="4">4</div>
+    <div class="key" data-key="5">5</div>
+    <div class="key" data-key="6">6</div>
+    <div class="key" data-key="7">7</div>
+    <div class="key" data-key="8">8</div>
+    <div class="key" data-key="9">9</div>
+    <div class="key" data-key="0">0</div>
+  </div>
+
+  <!-- Row 1: AZERTY -->
+  <div class="row" id="row1">
+    <div class="key" data-key="a">a</div>
+    <div class="key" data-key="z">z</div>
+    <div class="key" data-key="e">e</div>
+    <div class="key" data-key="r">r</div>
+    <div class="key" data-key="t">t</div>
+    <div class="key" data-key="y">y</div>
+    <div class="key" data-key="u">u</div>
+    <div class="key" data-key="i">i</div>
+    <div class="key" data-key="o">o</div>
+    <div class="key" data-key="p">p</div>
+  </div>
+
+  <!-- Row 2 -->
+  <div class="row" id="row2">
+    <div class="key" data-key="q">q</div>
+    <div class="key" data-key="s">s</div>
+    <div class="key" data-key="d">d</div>
+    <div class="key" data-key="f">f</div>
+    <div class="key" data-key="g">g</div>
+    <div class="key" data-key="h">h</div>
+    <div class="key" data-key="j">j</div>
+    <div class="key" data-key="k">k</div>
+    <div class="key" data-key="l">l</div>
+    <div class="key" data-key="m">m</div>
+  </div>
+
+  <!-- Row 3: Shift + letters + backspace -->
+  <div class="row" id="row3">
+    <div class="key shift action" data-key="shift" id="shiftKey">⇧</div>
+    <div class="key" data-key="w">w</div>
+    <div class="key" data-key="x">x</div>
+    <div class="key" data-key="c">c</div>
+    <div class="key" data-key="v">v</div>
+    <div class="key" data-key="b">b</div>
+    <div class="key" data-key="n">n</div>
+    <div class="key" data-key="'">'</div>
+    <div class="key backspace action" data-key="backspace">⌫</div>
+  </div>
+
+  <!-- Bottom row -->
+  <div class="row" id="bottomRow">
+    <div class="key wide action" data-key="symbols">!#1</div>
+    <div class="key action" data-key="globe" id="globeKey">🌐</div>
+    <div class="key action" data-key=",">,</div>
+    <div class="key space" data-key="space">Français (FR)</div>
+    <div class="key action" data-key=".">.</div>
+    <div class="key wide action enter" data-key="enter">⏎</div>
+  </div>
+</div>
+
+<script>
+const input = document.getElementById('textInput');
+const modIndicator = document.getElementById('modIndicator');
+const shiftKey = document.getElementById('shiftKey');
+let shiftActive = false;
+let ctrlActive = false;
+let altActive = false;
+let fnActive = false;
+
+// Key press handler
+document.querySelectorAll('.key').forEach(key => {
+  key.addEventListener('mousedown', (e) => {
+    e.preventDefault();
+    const k = key.dataset.key;
+    key.classList.add('pressed');
+
+    if (k === 'shift') {
+      shiftActive = !shiftActive;
+      updateShift();
+      updateSuggestions();
+      return;
+    }
+    if (k === 'backspace') {
+      input.value = input.value.slice(0, -1);
+      updateSuggestions();
+      return;
+    }
+    if (k === 'space') {
+      input.value += ' ';
+      updateSuggestions();
+      return;
+    }
+    if (k === 'enter') {
+      input.value += '\n';
+      return;
+    }
+    if (k === 'globe') {
+      // Toggle language
+      document.querySelector('.key.space').textContent = 
+        document.querySelector('.key.space').textContent === 'Français (FR)' ? 'English (US)' : 'Français (FR)';
+      return;
+    }
+    if (k === 'symbols') {
+      toggleSymbols();
+      return;
+    }
+    if (k === 'ctrl') {
+      ctrlActive = !ctrlActive;
+      updateModifiers();
+      return;
+    }
+
+    // Regular character
+    let char = k;
+    if (shiftActive) char = k.toUpperCase();
+    input.value += char;
+    shiftActive = false;
+    updateShift();
+    updateSuggestions();
+  });
+
+  key.addEventListener('mouseup', () => {
+    key.classList.remove('pressed');
+  });
+  key.addEventListener('mouseleave', () => {
+    key.classList.remove('pressed');
+  });
+});
+
+// Long press for Ctrl
+let longPressTimer;
+document.querySelectorAll('.key.action').forEach(key => {
+  key.addEventListener('mousedown', () => {
+    const k = key.dataset.key;
+    if (k === 'globe') {
+      longPressTimer = setTimeout(() => {
+        ctrlActive = !ctrlActive;
+        updateModifiers();
+      }, 500);
+    }
+  });
+  key.addEventListener('mouseup', () => clearTimeout(longPressTimer));
+  key.addEventListener('mouseleave', () => clearTimeout(longPressTimer));
+});
+
+function updateShift() {
+  const keys = document.querySelectorAll('#row1 .key, #row2 .key, #row3 .key:not(.action)');
+  keys.forEach(k => {
+    if (shiftActive) {
+      k.textContent = k.dataset.key.toUpperCase();
+      k.style.fontSize = '20px';
+    } else {
+      k.textContent = k.dataset.key;
+      k.style.fontSize = '';
+    }
+  });
+  shiftKey.classList.toggle('active', shiftActive);
+  if (shiftActive) {
+    shiftKey.style.background = '#4A90D9';
+    shiftKey.style.color = '#fff';
+  } else {
+    shiftKey.style.background = '';
+    shiftKey.style.color = '';
+  }
+}
+
+function updateModifiers() {
+  modIndicator.classList.toggle('visible', ctrlActive || altActive || fnActive);
+  if (ctrlActive) {
+    modIndicator.textContent = 'CTRL ACTIF';
+    modIndicator.style.background = '#1a5c2a';
+    modIndicator.style.color = '#30D158';
+    document.getElementById('globeKey').classList.add('active');
+  } else {
+    modIndicator.classList.remove('visible');
+    document.getElementById('globeKey').classList.remove('active');
+  }
+}
+
+function updateSuggestions() {
+  const text = input.value.toLowerCase();
+  const words = {
+    'b': ['Bonjour', 'Bonsoir', 'Bonsoir'],
+    'f': ['F', 'Fix', 'For', 'Fait', 'From', 'Faut', 'Faire', 'First'],
+    's': ['Salut', 'Super', 'Solution', 'Soon', 'Stop'],
+    '': ['Bonjour', 'Bonsoir', 'Merci', 'Ok', 'Oui', 'Non']
+  };
+  const suggestions = document.getElementById('suggestions');
+  const lastWord = text.split(' ').pop();
+  const sugs = words[lastWord] || words[''];
+  suggestions.innerHTML = sugs.slice(0, 3).map(w => 
+    `<div class="suggestion" onclick="insertWord(this)">${w}</div>`
+  ).join('') + '<div class="suggestion more">⋯</div>';
+}
+
+function insertWord(el) {
+  const words = input.value.split(' ');
+  words[words.length - 1] = el.textContent;
+  input.value = words.join(' ') + ' ';
+  updateSuggestions();
+}
+
+function toggleClipboard() {
+  document.getElementById('clipboardBar').classList.toggle('visible');
+}
+
+let symbolsVisible = false;
+function toggleSymbols() {
+  symbolsVisible = !symbolsVisible;
+  const rows = document.querySelectorAll('#row1, #row2, #row3');
+  const numRow = document.getElementById('numberRow');
+  const bottomRow = document.getElementById('bottomRow');
+
+  if (symbolsVisible) {
+    // Show symbols page 1
+    rows[0].innerHTML = ['+','×','÷','=','/','_','<','>','[',']'].map(k => 
+      `<div class="key" data-key="${k}">${k}</div>`
+    ).join('');
+    rows[1].innerHTML = ['!','@','#','€','%','^','&','*','(',')'].map(k => 
+      `<div class="key" data-key="${k}">${k}</div>`
+    ).join('');
+    rows[2].innerHTML = `
+      <div class="key wide action" data-key="symbols">1/2</div>
+      <div class="key" data-key="-">-</div>
+      <div class="key" data-key="'">'</div>
+      <div class="key" data-key="&quot;">"</div>
+      <div class="key" data-key=":">:</div>
+      <div class="key" data-key=";">;</div>
+      <div class="key" data-key=",">,</div>
+      <div class="key" data-key="?">?</div>
+      <div class="key backspace action" data-key="backspace">⌫</div>
+    `;
+    bottomRow.querySelector('[data-key="globe"]').textContent = 'ABC';
+    bottomRow.querySelector('[data-key="globe"]').dataset.key = 'symbols';
+  } else {
+    // Restore AZERTY
+    rows[0].innerHTML = ['a','z','e','r','t','y','u','i','o','p'].map(k => 
+      `<div class="key" data-key="${k}">${k}</div>`
+    ).join('');
+    rows[1].innerHTML = ['q','s','d','f','g','h','j','k','l','m'].map(k => 
+      `<div class="key" data-key="${k}">${k}</div>`
+    ).join('');
+    rows[2].innerHTML = `
+      <div class="key shift action" data-key="shift" id="shiftKey">⇧</div>
+      <div class="key" data-key="w">w</div>
+      <div class="key" data-key="x">x</div>
+      <div class="key" data-key="c">c</div>
+      <div class="key" data-key="v">v</div>
+      <div class="key" data-key="b">b</div>
+      <div class="key" data-key="n">n</div>
+      <div class="key" data-key="'">'</div>
+      <div class="key backspace action" data-key="backspace">⌫</div>
+    `;
+    bottomRow.querySelector('[data-key="symbols"]').textContent = '!#1';
+    bottomRow.querySelector('[data-key="symbols"]').dataset.key = 'symbols';
+    bottomRow.querySelector('[data-key="symbols"]').previousElementSibling.textContent = '🌐';
+    bottomRow.querySelector('[data-key="symbols"]').previousElementSibling.dataset.key = 'globe';
+    rebindKeys();
+    updateShift();
+  }
+  rebindKeys();
+}
+
+function rebindKeys() {
+  document.querySelectorAll('.key').forEach(key => {
+    key.replaceWith(key.cloneNode(true));
+  });
+  // Rebind after clone
+  document.querySelectorAll('.key').forEach(key => {
+    key.addEventListener('mousedown', (e) => {
+      e.preventDefault();
+      const k = key.dataset.key;
+      key.classList.add('pressed');
+
+      if (k === 'shift') { shiftActive = !shiftActive; updateShift(); return; }
+      if (k === 'backspace') { input.value = input.value.slice(0, -1); updateSuggestions(); return; }
+      if (k === 'space') { input.value += ' '; updateSuggestions(); return; }
+      if (k === 'enter') { return; }
+      if (k === 'globe') { 
+        document.querySelector('.key.space').textContent = 
+          document.querySelector('.key.space').textContent === 'Français (FR)' ? 'English (US)' : 'Français (FR)';
+        return; 
+      }
+      if (k === 'symbols') { toggleSymbols(); return; }
+      let char = k;
+      if (shiftActive && k.length === 1) char = k.toUpperCase();
+      input.value += char;
+      shiftActive = false;
+      updateShift();
+      updateSuggestions();
+    });
+    key.addEventListener('mouseup', () => key.classList.remove('pressed'));
+    key.addEventListener('mouseleave', () => key.classList.remove('pressed'));
+  });
+}
+</script>
+</body>
+</html>
