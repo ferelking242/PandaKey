@@ -114,7 +114,7 @@
     <string name="launcher_button_imepicker">Select keyboard</string>
     <string name="launcher_button_dictionaries">Install dictionaries</string>
     <string name="launcher_description">PandaKey is a powerful, privacy-respecting virtual keyboard for Android. Enable it in system settings below.</string>
-    <string name="launcher_sourcecode">Free & open source. Source code and bug reports on GitHub.</string>
+    <string name="launcher_sourcecode">Free &amp; open source. Source code and bug reports on GitHub.</string>
     <string name="launcher_tryhere">After enabling, you can try the keyboard here:</string>
     <string name="launcher_tryhere_hint">Try here</string>
     <string name="key_descr_capslock">Caps lock</string>
