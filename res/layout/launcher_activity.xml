@@ -1,25 +1,151 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent" android:layout_height="match_parent" android:fillViewport="true" android:fitsSystemWindows="true">
-  <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="vertical">
-    <TextView style="@style/paragraph" android:text="@string/launcher_description"/>
-    <Button style="@style/paragraph" android:text="@string/launcher_button_imesettings" android:onClick="launch_imesettings" android:layout_width="wrap_content"/>
-    <Button style="@style/paragraph" android:text="@string/launcher_button_imepicker" android:onClick="launch_imepicker" android:layout_width="wrap_content"/>
-    <Button style="@style/paragraph" android:text="@string/launcher_button_dictionaries" android:onClick="launch_dictionaries_activity" android:layout_width="wrap_content"/>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:fillViewport="true"
+  android:fitsSystemWindows="true"
+  android:background="#1C1C1E">
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingHorizontal="24dp"
+    android:paddingTop="32dp"
+    android:paddingBottom="24dp">
+
+    <!-- PandaKey Logo / Title -->
+    <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="🐼 PandaKey"
+      android:textSize="28sp"
+      android:textStyle="bold"
+      android:textColor="#FFFFFF"
+      android:layout_gravity="center"
+      android:layout_marginBottom="8dp"/>
+
+    <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="@string/launcher_description"
+      android:textSize="14sp"
+      android:textColor="#8E8E93"
+      android:gravity="center"
+      android:layout_gravity="center"
+      android:layout_marginBottom="24dp"/>
+
+    <!-- Enable Button -->
+    <Button
+      android:id="@+id/btn_enable"
+      android:layout_width="match_parent"
+      android:layout_height="48dp"
+      android:text="@string/launcher_button_imesettings"
+      android:textSize="14sp"
+      android:textStyle="bold"
+      android:textColor="#FFFFFF"
+      android:background="#4A90D9"
+      android:layout_marginBottom="12dp"
+      android:onClick="launch_imesettings"/>
+
+    <!-- Select Button -->
+    <Button
+      android:id="@+id/btn_select"
+      android:layout_width="match_parent"
+      android:layout_height="48dp"
+      android:text="@string/launcher_button_imepicker"
+      android:textSize="14sp"
+      android:textStyle="bold"
+      android:textColor="#FFFFFF"
+      android:background="#3D3D3D"
+      android:layout_marginBottom="12dp"
+      android:onClick="launch_imepicker"/>
+
+    <!-- Dictionaries Button -->
+    <Button
+      android:id="@+id/btn_dicts"
+      android:layout_width="match_parent"
+      android:layout_height="48dp"
+      android:text="@string/launcher_button_dictionaries"
+      android:textSize="14sp"
+      android:textStyle="bold"
+      android:textColor="#FFFFFF"
+      android:background="#3D3D3D"
+      android:layout_marginBottom="24dp"
+      android:onClick="launch_dictionaries_activity"/>
+
+    <!-- Divider -->
+    <View
+      android:layout_width="match_parent"
+      android:layout_height="1dp"
+      android:background="#3D3D3D"
+      android:layout_marginBottom="16dp"/>
+
+    <!-- Try Here Section -->
+    <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="@string/launcher_tryhere"
+      android:textSize="14sp"
+      android:textColor="#8E8E93"
+      android:layout_gravity="center"
+      android:layout_marginBottom="12dp"/>
+
+    <EditText
+      android:id="@+id/launcher_tryhere_area"
+      android:layout_width="match_parent"
+      android:layout_height="48dp"
+      android:inputType="text"
+      android:hint="@string/launcher_tryhere_hint"
+      android:importantForAutofill="no"
+      android:background="#3D3D3D"
+      android:textColor="#FFFFFF"
+      android:textColorHint="#636366"
+      android:paddingHorizontal="16dp"
+      android:textSize="16sp"
+      android:layout_marginBottom="24dp"/>
+
+    <!-- Animations -->
     <LinearLayout style="@style/anim_box">
       <ImageView style="@style/anim" android:id="@+id/launcher_anim_swipe" android:background="@drawable/doc_key_u" android:src="@drawable/doc_anim_swipe"/>
-      <TextView style="@style/anim_text" android:text="@string/launcher_anim_7"/>
+      <TextView style="@style/anim_text" android:text="@string/launcher_anim_7" android:textColor="#FFFFFF"/>
     </LinearLayout>
     <LinearLayout style="@style/anim_box">
       <ImageView style="@style/anim" android:id="@+id/launcher_anim_circle" android:background="@drawable/doc_key_g" android:src="@drawable/doc_anim_circle"/>
-      <TextView style="@style/anim_text" android:text="@string/launcher_anim_g"/>
+      <TextView style="@style/anim_text" android:text="@string/launcher_anim_g" android:textColor="#FFFFFF"/>
     </LinearLayout>
     <LinearLayout style="@style/anim_box">
       <ImageView style="@style/anim" android:id="@+id/launcher_anim_round_trip" android:background="@drawable/doc_key_g" android:src="@drawable/doc_anim_round_trip"/>
-      <TextView style="@style/anim_text" android:text="@string/launcher_anim_dash"/>
+      <TextView style="@style/anim_text" android:text="@string/launcher_anim_dash" android:textColor="#FFFFFF"/>
     </LinearLayout>
-    <TextView android:id="@+id/launcher_tryhere_text" style="@style/paragraph" android:text="@string/launcher_tryhere"/>
-    <EditText android:id="@+id/launcher_tryhere_area" style="@style/paragraph" android:inputType="text" android:hint="@string/launcher_tryhere_hint" android:importantForAutofill="no"/>
-    <TextView style="@style/paragraph" android:text="@string/launcher_sourcecode"/>
-    <TextView style="@style/paragraph" android:text="@string/launcher_repo_url" android:autoLink="web" android:linksClickable="true"/>
+
+    <!-- Divider -->
+    <View
+      android:layout_width="match_parent"
+      android:layout_height="1dp"
+      android:background="#3D3D3D"
+      android:layout_marginVertical="16dp"/>
+
+    <!-- Footer -->
+    <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="@string/launcher_sourcecode"
+      android:textSize="12sp"
+      android:textColor="#636366"
+      android:gravity="center"
+      android:layout_gravity="center"
+      android:layout_marginBottom="4dp"/>
+
+    <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="@string/launcher_repo_url"
+      android:textSize="12sp"
+      android:textColor="#4A90D9"
+      android:autoLink="web"
+      android:linksClickable="true"
+      android:gravity="center"
+      android:layout_gravity="center"/>
+
   </LinearLayout>
 </ScrollView>

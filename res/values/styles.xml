@@ -162,7 +162,14 @@
     <item name="android:padding">8dp</item>
     <item name="android:scaleType">fitCenter</item>
   </style>
-  <style name="appTheme" parent="@android:style/Theme.Material.Light"/>
+  <style name="appTheme" parent="@android:style/Theme.Material.NoActionBar">
+    <item name="android:windowBackground">#1C1C1E</item>
+    <item name="android:colorPrimary">#4A90D9</item>
+    <item name="android:colorAccent">#4A90D9</item>
+    <item name="android:statusBarColor">#1C1C1E</item>
+    <item name="android:navigationBarColor">#1C1C1E</item>
+    <item name="android:windowLightStatusBar">false</item>
+  </style>
   <style name="settingsTheme" parent="appTheme">
     <!-- Setting this in the activity theme so it propagate to nested
          preference screens. -->

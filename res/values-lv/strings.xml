@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name_release">Unexpected Keyboard</string>
-    <string name="app_name_debug">Unexpected Keyboard (atkļūdošana)</string>
+    <string name="app_name_release">PandaKey</string>
+    <string name="app_name_debug">PandaKey (atkļūdošana)</string>
     <string name="short_description">Mazizmēra virtuālā Android tastatūra, kurai rūp privātums.</string>
     <string name="store_description">Tastatūras galvenā iespēja — viegli ievadīt jebkuru ASCII rakstzīmi ar pavilkšanu uz taustiņu stūriem.\n\nSākotnēji šī lietotne tika izstrādāta programmētājiem, kas izmanto Termux.\nTagad tā lieliski piemērota arī ikdienas lietošanai.\n\nLietotne nesatur reklāmas, un tās pirmkods ir pieejams visiem.</string>
     <string name="pref_portrait">Stateniskajā novietojumā</string>
@@ -84,7 +84,7 @@
     <string name="key_action_send">Sūtīt</string>
     <string name="launcher_button_imesettings">Iespējot tastatūru</string>
     <string name="launcher_button_imepicker">Izvēlēties tastatūru</string>
-    <string name="launcher_description">Šī lietotne ir virtuālā tastatūra. Zemāk esošās pogas nospiešana atvērs sistēmas iestatījumus, lai varētu iespējot Unexpected Keyboard.</string>
+    <string name="launcher_description">Šī lietotne ir virtuālā tastatūra. Zemāk esošās pogas nospiešana atvērs sistēmas iestatījumus, lai varētu iespējot PandaKey.</string>
     <string name="launcher_sourcecode">Šī ir bezmaksas un atvērtā pirmkoda lietotne. GitHub var atrast pirmkodu un ziņot par nepilnībām.</string>
     <string name="launcher_tryhere">Pēc iespējošanas šeit var izmēģināt tastatūru:</string>
     <string name="launcher_tryhere_hint">Izmēģināt šeit</string>
