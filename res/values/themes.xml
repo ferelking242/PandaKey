@@ -62,72 +62,88 @@
     <item name="suggestions_background">?attr/colorKeyboard</item>
     <item name="suggestions_border_radius">?attr/keyBorderRadius</item>
   </style>
+  <!-- Samsung-style Dark: dark keys with visible borders on near-black bg -->
   <style name="Dark" parent="BaseTheme">
     <item name="android:isLightTheme">false</item>
-    <item name="colorKeyboard">#1C1C1E</item>
-    <item name="colorKey">#3D3D3D</item>
-    <item name="colorKeyActivated">#5A5A5A</item>
-    <item name="colorKeyAction">#2C2C2E</item>
-    <item name="colorKeySpaceBar">#3A3A3C</item>
-    <item name="keyBorderWidth">0dp</item>
-    <item name="keyBorderWidthActivated">0dp</item>
+    <item name="colorKeyboard">#121212</item>
+    <item name="colorKey">#2B2B2B</item>
+    <item name="colorKeyActivated">#4A4A4A</item>
+    <item name="colorKeyAction">#1E1E1E</item>
+    <item name="colorKeySpaceBar">#2B2B2B</item>
+    <item name="keyBorderWidth">0.8dp</item>
+    <item name="keyBorderWidthActivated">0.8dp</item>
     <item name="keyBorderWidthAction">0dp</item>
     <item name="keyBorderWidthSpaceBar">0dp</item>
-    <item name="keyBorderColorBottom">#404040</item>
-    <item name="colorLabel">#FFFFFF</item>
+    <item name="keyBorderColorLeft">#3A3A3A</item>
+    <item name="keyBorderColorTop">#3A3A3A</item>
+    <item name="keyBorderColorRight">#3A3A3A</item>
+    <item name="keyBorderColorBottom">#3A3A3A</item>
+    <item name="colorLabel">#E8E8E8</item>
     <item name="colorLabelActivated">#4A90D9</item>
-    <item name="colorLabelPressed">#BBBBBB</item>
-    <item name="colorLabelLocked">#33cc33</item>
-    <item name="colorSubLabel">#8E8E93</item>
-    <item name="keyBorderRadius">6dp</item>
-    <item name="emoji_button_bg" type="color">#2C2C2E</item>
-    <item name="emoji_color" type="color">#FFFFFF</item>
+    <item name="colorLabelPressed">#999999</item>
+    <item name="colorLabelLocked">#30D158</item>
+    <item name="colorSubLabel">#7A7A7A</item>
+    <item name="keyBorderRadius">8dp</item>
+    <item name="secondaryDimming">0.30</item>
+    <item name="greyedDimming">0.50</item>
+    <item name="emoji_button_bg" type="color">#2B2B2B</item>
+    <item name="emoji_color" type="color">#E8E8E8</item>
+    <item name="suggestions_background">#121212</item>
   </style>
+  <!-- Samsung One UI Dark: exact match -->
   <style name="SamsungDark" parent="BaseTheme">
     <item name="android:isLightTheme">false</item>
-    <item name="colorKeyboard">#1C1C1E</item>
-    <item name="colorKey">#3A3A3C</item>
-    <item name="colorKeyActivated">#545456</item>
-    <item name="colorKeyAction">#2C2C2E</item>
-    <item name="colorKeySpaceBar">#2C2C2E</item>
-    <item name="keyBorderWidth">0dp</item>
-    <item name="keyBorderWidthActivated">0dp</item>
+    <item name="colorKeyboard">#0D0D0D</item>
+    <item name="colorKey">#2A2A2A</item>
+    <item name="colorKeyActivated">#484848</item>
+    <item name="colorKeyAction">#1A1A1A</item>
+    <item name="colorKeySpaceBar">#2A2A2A</item>
+    <item name="keyBorderWidth">0.8dp</item>
+    <item name="keyBorderWidthActivated">0.8dp</item>
     <item name="keyBorderWidthAction">0dp</item>
     <item name="keyBorderWidthSpaceBar">0dp</item>
-    <item name="keyBorderColorBottom">#48484A</item>
-    <item name="colorLabel">#FFFFFF</item>
+    <item name="keyBorderColorLeft">#383838</item>
+    <item name="keyBorderColorTop">#383838</item>
+    <item name="keyBorderColorRight">#383838</item>
+    <item name="keyBorderColorBottom">#383838</item>
+    <item name="colorLabel">#EAEAEA</item>
     <item name="colorLabelActivated">#4A90D9</item>
-    <item name="colorLabelPressed">#BBBBBB</item>
+    <item name="colorLabelPressed">#888888</item>
     <item name="colorLabelLocked">#30D158</item>
-    <item name="colorSubLabel">#8E8E93</item>
+    <item name="colorSubLabel">#6E6E6E</item>
     <item name="keyBorderRadius">8dp</item>
-    <item name="secondaryDimming">0.35</item>
-    <item name="greyedDimming">0.55</item>
-    <item name="emoji_button_bg" type="color">#2C2C2E</item>
-    <item name="emoji_color" type="color">#FFFFFF</item>
-    <item name="suggestions_background">#1C1C1E</item>
+    <item name="secondaryDimming">0.30</item>
+    <item name="greyedDimming">0.50</item>
+    <item name="emoji_button_bg" type="color">#2A2A2A</item>
+    <item name="emoji_color" type="color">#EAEAEA</item>
+    <item name="suggestions_background">#0D0D0D</item>
   </style>
+  <!-- Samsung One UI Light -->
   <style name="Light" parent="BaseTheme">
     <item name="android:isLightTheme">true</item>
-    <item name="colorKeyboard">#e3e3e3</item>
-    <item name="colorKey">#cccccc</item>
-    <item name="colorKeyActivated">#e3e3e3</item>
-    <item name="colorKeyAction">#d9d9d9</item>
-    <item name="colorKeySpaceBar">#dedede</item>
+    <item name="colorKeyboard">#D6D6D6</item>
+    <item name="colorKey">#F0F0F0</item>
+    <item name="colorKeyActivated">#DCDCDC</item>
+    <item name="colorKeyAction">#C8C8C8</item>
+    <item name="colorKeySpaceBar">#F0F0F0</item>
     <item name="keyBorderWidth">0.6dp</item>
     <item name="keyBorderWidthActivated">0dp</item>
     <item name="keyBorderWidthAction">0dp</item>
     <item name="keyBorderWidthSpaceBar">0dp</item>
-    <item name="keyBorderColorLeft">#cccccc</item>
-    <item name="keyBorderColorTop">#eeeeee</item>
-    <item name="keyBorderColorRight">#cccccc</item>
-    <item name="keyBorderColorBottom">#aaaaaa</item>
-    <item name="colorLabel">#000000</item>
-    <item name="colorLabelActivated">#0066cc</item>
-    <item name="colorLabelLocked">#33cc33</item>
-    <item name="colorSubLabel">#333333</item>
-    <item name="emoji_button_bg">#dedede</item>
-    <item name="emoji_color">#000000</item>
+    <item name="keyBorderColorLeft">#E0E0E0</item>
+    <item name="keyBorderColorTop">#F8F8F8</item>
+    <item name="keyBorderColorRight">#E0E0E0</item>
+    <item name="keyBorderColorBottom">#B8B8B8</item>
+    <item name="colorLabel">#1A1A1A</item>
+    <item name="colorLabelActivated">#0078D4</item>
+    <item name="colorLabelLocked">#1B8C3A</item>
+    <item name="colorSubLabel">#666666</item>
+    <item name="keyBorderRadius">8dp</item>
+    <item name="secondaryDimming">0.25</item>
+    <item name="greyedDimming">0.50</item>
+    <item name="emoji_button_bg">#F0F0F0</item>
+    <item name="emoji_color">#1A1A1A</item>
+    <item name="suggestions_background">#D6D6D6</item>
   </style>
   <style name="Black" parent="BaseTheme">
     <item name="android:isLightTheme">false</item>

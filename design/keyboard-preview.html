@@ -2,434 +2,469 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PandaKey — Samsung Dark Keyboard Preview</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>PandaKey — Samsung Keyboard Preview</title>
 <style>
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body { background: #000; font-family: -apple-system, 'Roboto', sans-serif; display: flex; flex-direction: column; height: 100vh; overflow: hidden; }
+:root {
+  /* Samsung exact colors from screenshot */
+  --bg: #0D0D0D;
+  --key-bg: #2A2A2A;
+  --key-border: #383838;
+  --key-pressed: #484848;
+  --key-action-bg: #1A1A1A;
+  --label: #EAEAEA;
+  --label-dim: #888888;
+  --sublabel: #6E6E6E;
+  --accent-blue: #4A90D9;
+  --accent-green: #30D158;
+  --toolbar-bg: #0D0D0D;
+  --suggestion-bg: #0D0D0D;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+body {
+  background: #000;
+  font-family: 'Roboto', -apple-system, sans-serif;
+  display: flex; flex-direction: column;
+  height: 100vh; height: 100dvh;
+  overflow: hidden;
+  touch-action: manipulation;
+}
 
-/* App mockup */
-.app { flex: 1; background: #1a1a2e; padding: 16px; display: flex; flex-direction: column; }
-.app-bar { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
-.app-bar .avatar { width: 40px; height: 40px; border-radius: 50%; background: #4A90D9; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 18px; }
-.app-bar .title { color: #fff; font-size: 16px; font-weight: 500; }
-.app-bar .subtitle { color: #8E8E93; font-size: 12px; }
-.messages { flex: 1; display: flex; flex-direction: column; gap: 8px; overflow-y: auto; }
-.msg { max-width: 75%; padding: 10px 14px; border-radius: 18px; font-size: 15px; line-height: 1.4; }
-.msg.in { background: #2C2C2E; color: #fff; align-self: flex-start; border-bottom-left-radius: 4px; }
-.msg.out { background: #4A90D9; color: #fff; align-self: flex-end; border-bottom-right-radius: 4px; }
-.input-bar { display: flex; align-items: center; gap: 8px; padding: 8px 0; }
-.input-bar input { flex: 1; background: #2C2C2E; border: none; border-radius: 20px; padding: 10px 16px; color: #fff; font-size: 15px; outline: none; }
-.input-bar .send { width: 40px; height: 40px; border-radius: 50%; background: #4A90D9; border: none; color: #fff; font-size: 18px; cursor: pointer; }
+/* ═══ Keyboard ═══ */
+.keyboard {
+  background: var(--bg);
+  user-select: none;
+  flex-shrink: 0;
+  display: flex; flex-direction: column;
+  padding-bottom: env(safe-area-inset-bottom, 0);
+}
 
-/* Keyboard */
-.keyboard { background: #1C1C1E; padding: 4px 2px 0; user-select: none; }
+/* ─── Toolbar (6 icons) ─── */
+.toolbar {
+  display: flex; align-items: center; justify-content: space-around;
+  height: 44px; padding: 0 4px;
+  background: var(--toolbar-bg);
+  border-bottom: 0.5px solid #1A1A1A;
+}
+.tb-icon {
+  width: 40px; height: 40px;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 8px;
+  color: #98989D;
+  font-size: 17px;
+  cursor: pointer;
+  position: relative;
+}
+.tb-icon:active { background: #2A2A2A; }
+.tb-icon.active { color: var(--accent-blue); }
+.tb-icon .dot {
+  position: absolute; top: 4px; right: 4px;
+  width: 8px; height: 8px; border-radius: 50%;
+  background: #FF9500;
+}
 
-/* Suggestion bar */
-.suggestions { display: flex; align-items: center; height: 42px; padding: 0 8px; gap: 4px; background: #1C1C1E; border-bottom: 0.5px solid #38383A; }
-.suggestion { flex: 1; text-align: center; color: #fff; font-size: 15px; padding: 8px 4px; border-radius: 6px; cursor: pointer; }
-.suggestion:active { background: #3A3A3C; }
-.suggestion.more { color: #8E8E93; flex: 0 0 30px; }
+/* ─── Key Row ─── */
+.key-row {
+  display: flex; justify-content: center;
+  gap: 5px; padding: 3px 4px;
+}
 
-/* Toolbar */
-.toolbar { display: flex; align-items: center; justify-content: space-around; height: 42px; padding: 0 12px; background: #1C1C1E; border-bottom: 0.5px solid #38383A; }
-.toolbar-icon { width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; border-radius: 8px; color: #8E8E93; font-size: 18px; cursor: pointer; }
-.toolbar-icon:active { background: #3A3A3C; color: #fff; }
-.toolbar-icon.active { color: #4A90D9; }
+/* ─── Key ─── */
+.key {
+  height: 46px; min-width: 0; flex: 1; max-width: 38px;
+  background: var(--key-bg);
+  border: 0.8px solid var(--key-border);
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--label);
+  font-size: 22px; font-weight: 400;
+  cursor: pointer;
+  position: relative;
+  transition: background 0.05s, transform 0.05s;
+  will-change: transform;
+}
+.key:active, .key.pressed {
+  background: var(--key-pressed);
+  transform: scale(0.93);
+}
 
-/* Key rows */
-.row { display: flex; justify-content: center; gap: 5px; padding: 4px 3px; }
-.key { height: 46px; min-width: 32px; flex: 1; max-width: 42px; background: #3A3A3C; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 22px; font-weight: 400; cursor: pointer; transition: background 0.08s, transform 0.08s; position: relative; }
-.key:active, .key.pressed { background: #545456; transform: scale(0.95); }
-.key.wide { flex: 1.5; max-width: 60px; }
-.key.space { flex: 5; max-width: none; font-size: 13px; color: #8E8E93; letter-spacing: 0.5px; }
-.key.action { background: #2C2C2E; font-size: 16px; }
-.key.shift { font-size: 20px; }
-.key.shift.active { background: #4A90D9; color: #fff; }
-.key.modifier.active { background: #1a5c2a; color: #30D158; }
-.key.enter { background: #4A90D9; max-width: 52px; }
-.key.backspace { font-size: 18px; }
-.key.sublabel { font-size: 10px; position: absolute; bottom: 3px; color: #8E8E93; }
+/* Number row - same size as letters, same bg */
+.number-row .key {
+  height: 46px;
+  font-size: 22px;
+  background: var(--key-bg);
+  border: 0.8px solid var(--key-border);
+}
+.number-row .key:active { background: var(--key-pressed); }
 
-/* Number row */
-.number-row .key { height: 40px; font-size: 20px; background: #2C2C2E; }
-.number-row .key:active { background: #48484A; }
+/* Action keys (transparent bg) */
+.key.action-key {
+  background: transparent;
+  border: none;
+  color: #98989D;
+  font-size: 18px;
+}
+.key.action-key:active { background: #2A2A2A; }
 
-/* Status bar */
-.status-bar { display: flex; align-items: center; justify-content: space-between; padding: 4px 16px; background: #000; color: #fff; font-size: 12px; height: 28px; }
-.status-bar .time { font-weight: 600; }
-.status-bar .icons { display: flex; gap: 6px; }
+/* Wide key */
+.key.wide { flex: 1.5; max-width: 54px; }
 
-/* Modifier indicator */
-.mod-indicator { display: none; align-items: center; justify-content: center; height: 28px; background: #1a5c2a; color: #30D158; font-size: 12px; font-weight: 600; letter-spacing: 1px; }
-.mod-indicator.visible { display: flex; }
+/* Space bar */
+.key.space {
+  flex: 5; max-width: none;
+  background: var(--key-bg);
+  border: 0.8px solid var(--key-border);
+  font-size: 13px;
+  gap: 4px;
+}
+.key.space .space-label { color: var(--label-dim); letter-spacing: 0.3px; }
+.key.space .mic-icon { font-size: 12px; color: #666; margin-left: 2px; }
 
-/* Clipboard bar */
-.clipboard-bar { display: none; align-items: center; height: 42px; padding: 0 12px; background: #1C1C1E; border-bottom: 0.5px solid #38383A; gap: 8px; }
-.clipboard-bar.visible { display: flex; }
-.clipboard-bar .clip-text { flex: 1; color: #fff; font-size: 14px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.clipboard-bar .clip-close { color: #8E8E93; font-size: 18px; cursor: pointer; }
+/* Shift */
+.key.shift-key {
+  font-size: 18px;
+  background: transparent;
+  border: none;
+  color: #98989D;
+  max-width: 48px;
+}
+.key.shift-key:active { background: #2A2A2A; }
+.key.shift-key.locked { background: var(--accent-blue); color: #fff; border: none; }
+
+/* Backspace */
+.key.backspace-key {
+  background: transparent;
+  border: none;
+  color: #98989D;
+  font-size: 18px;
+  max-width: 48px;
+}
+.key.backspace-key:active { background: #2A2A2A; }
+
+/* Enter/Search */
+.key.enter-key {
+  background: transparent;
+  border: none;
+  color: var(--accent-blue);
+  font-size: 20px;
+  max-width: 48px;
+}
+.key.enter-key:active { background: rgba(74,144,217,0.12); }
+
+/* ─── Candidate strip ─── */
+.candidate-strip {
+  display: flex; align-items: center;
+  height: 44px; padding: 0 6px; gap: 0;
+  background: var(--suggestion-bg);
+  border-bottom: 0.5px solid #1A1A1A;
+}
+.c-collapse {
+  width: 36px; height: 36px;
+  display: flex; align-items: center; justify-content: center;
+  color: #98989D; font-size: 16px;
+  cursor: pointer; flex-shrink: 0; border-radius: 6px;
+}
+.c-collapse:active { background: #2A2A2A; }
+.c-word {
+  flex: 1; text-align: center;
+  color: var(--label); font-size: 15px;
+  padding: 8px 4px; border-radius: 8px;
+  cursor: pointer; white-space: nowrap;
+}
+.c-word:active { background: #2A2A2A; }
+.c-more {
+  width: 36px; height: 36px;
+  display: flex; align-items: center; justify-content: center;
+  color: #98989D; font-size: 18px;
+  cursor: pointer; flex-shrink: 0; border-radius: 6px;
+}
+.c-more:active { background: #2A2A2A; }
+
+/* ─── Modifier bar ─── */
+.mod-bar {
+  display: none; align-items: center; justify-content: center;
+  height: 28px; font-size: 12px; font-weight: 600; letter-spacing: 1px;
+}
+.mod-bar.ctrl { display: flex; background: rgba(48,209,88,0.12); color: var(--accent-green); }
+.mod-bar.shift { display: flex; background: rgba(74,144,217,0.12); color: var(--accent-blue); }
+
+/* ─── Paste bar ─── */
+.paste-bar {
+  display: none; align-items: center;
+  height: 42px; padding: 0 12px;
+  background: var(--bg); gap: 8px;
+}
+.paste-bar.visible { display: flex; }
+.paste-bar .paste-text { flex: 1; color: var(--label); font-size: 14px; }
+.paste-bar .paste-close { color: #98989D; font-size: 18px; cursor: pointer; }
+
+/* ─── Touch ripple ─── */
+@keyframes ripple {
+  0% { transform: scale(0); opacity: 0.3; }
+  100% { transform: scale(2.5); opacity: 0; }
+}
+.ripple {
+  position: absolute; width: 40px; height: 40px; border-radius: 50%;
+  background: rgba(255,255,255,0.12); pointer-events: none;
+  animation: ripple 0.25s ease-out forwards;
+}
 </style>
 </head>
 <body>
 
-<!-- Status Bar -->
-<div class="status-bar">
-  <span class="time">18:43</span>
-  <span class="icons">📶 🔋</span>
-</div>
-
-<!-- App Mockup -->
-<div class="app">
-  <div class="app-bar">
-    <div class="avatar">💬</div>
-    <div>
-      <div class="title">PandaKey Chat</div>
-      <div class="subtitle">en ligne</div>
-    </div>
-  </div>
-  <div class="messages">
-    <div class="msg in">Salut ! Teste le nouveau clavier 🐼</div>
-    <div class="msg out">Ok j'essaie Samsung Dark theme</div>
-    <div class="msg in">Super les touches arrondies !</div>
-  </div>
-  <div class="input-bar">
-    <input type="text" id="textInput" placeholder="Message" readonly>
-    <button class="send">➤</button>
-  </div>
-</div>
-
-<!-- Keyboard -->
 <div class="keyboard" id="keyboard">
-  <!-- Modifier indicator -->
-  <div class="mod-indicator" id="modIndicator">CTRL ACTIF</div>
 
-  <!-- Suggestion bar -->
-  <div class="suggestions" id="suggestions">
-    <div class="suggestion" onclick="insertWord(this)">Bonjour</div>
-    <div class="suggestion" onclick="insertWord(this)">Bonsoir</div>
-    <div class="suggestion" onclick="insertWord(this)">Bonsoir</div>
-    <div class="suggestion more">⋯</div>
+  <!-- Modifier bar -->
+  <div class="mod-bar" id="modBar"></div>
+
+  <!-- Paste bar -->
+  <div class="paste-bar" id="pasteBar">
+    <span class="paste-text">Coller</span>
+    <span class="paste-close" onclick="document.getElementById('pasteBar').classList.remove('visible')">✕</span>
   </div>
 
   <!-- Toolbar -->
   <div class="toolbar">
-    <div class="toolbar-icon" title="Cursor">◇</div>
-    <div class="toolbar-icon" title="Text Select">⌊⌋</div>
-    <div class="toolbar-icon" title="Clipboard" onclick="toggleClipboard()">📋</div>
-    <div class="toolbar-icon" title="Translate">🌐</div>
-    <div class="toolbar-icon" title="Keyboard">⌨</div>
-    <div class="toolbar-icon" title="More">⋯</div>
+    <div class="tb-icon" title="Curseur">↔</div>
+    <div class="tb-icon" title="Sélection">埞</div>
+    <div class="tb-icon" title="Presse-papiers">📋</div>
+    <div class="tb-icon" title="Traduire">🌐</div>
+    <div class="tb-icon" title="Clavier">⌨</div>
+    <div class="tb-icon" title="Plus">⋯<span class="dot"></span></div>
   </div>
 
-  <!-- Clipboard bar -->
-  <div class="clipboard-bar" id="clipboardBar">
-    <span style="color:#8E8E93">📎</span>
-    <span class="clip-text">Coller</span>
-    <span class="clip-close" onclick="toggleClipboard()">✕</span>
+  <!-- Candidate strip -->
+  <div class="candidate-strip" id="candidates">
+    <div class="c-collapse">⌨</div>
+    <div class="c-word" onclick="pickWord(this)">Bonjour</div>
+    <div class="c-word" onclick="pickWord(this)">Bonsoir</div>
+    <div class="c-word" onclick="pickWord(this)">Merci</div>
+    <div class="c-more">⋯</div>
   </div>
 
   <!-- Number row -->
-  <div class="row number-row" id="numberRow">
-    <div class="key" data-key="1">1</div>
-    <div class="key" data-key="2">2</div>
-    <div class="key" data-key="3">3</div>
-    <div class="key" data-key="4">4</div>
-    <div class="key" data-key="5">5</div>
-    <div class="key" data-key="6">6</div>
-    <div class="key" data-key="7">7</div>
-    <div class="key" data-key="8">8</div>
-    <div class="key" data-key="9">9</div>
-    <div class="key" data-key="0">0</div>
+  <div class="key-row number-row" id="numberRow">
+    <div class="key" data-val="1">1</div>
+    <div class="key" data-val="2">2</div>
+    <div class="key" data-val="3">3</div>
+    <div class="key" data-val="4">4</div>
+    <div class="key" data-val="5">5</div>
+    <div class="key" data-val="6">6</div>
+    <div class="key" data-val="7">7</div>
+    <div class="key" data-val="8">8</div>
+    <div class="key" data-val="9">9</div>
+    <div class="key" data-val="0">0</div>
   </div>
 
   <!-- Row 1: AZERTY -->
-  <div class="row" id="row1">
-    <div class="key" data-key="a">a</div>
-    <div class="key" data-key="z">z</div>
-    <div class="key" data-key="e">e</div>
-    <div class="key" data-key="r">r</div>
-    <div class="key" data-key="t">t</div>
-    <div class="key" data-key="y">y</div>
-    <div class="key" data-key="u">u</div>
-    <div class="key" data-key="i">i</div>
-    <div class="key" data-key="o">o</div>
-    <div class="key" data-key="p">p</div>
+  <div class="key-row" id="row1">
+    <div class="key" data-val="a">a</div>
+    <div class="key" data-val="z">z</div>
+    <div class="key" data-val="e">e</div>
+    <div class="key" data-val="r">r</div>
+    <div class="key" data-val="t">t</div>
+    <div class="key" data-val="y">y</div>
+    <div class="key" data-val="u">u</div>
+    <div class="key" data-val="i">i</div>
+    <div class="key" data-val="o">o</div>
+    <div class="key" data-val="p">p</div>
   </div>
 
   <!-- Row 2 -->
-  <div class="row" id="row2">
-    <div class="key" data-key="q">q</div>
-    <div class="key" data-key="s">s</div>
-    <div class="key" data-key="d">d</div>
-    <div class="key" data-key="f">f</div>
-    <div class="key" data-key="g">g</div>
-    <div class="key" data-key="h">h</div>
-    <div class="key" data-key="j">j</div>
-    <div class="key" data-key="k">k</div>
-    <div class="key" data-key="l">l</div>
-    <div class="key" data-key="m">m</div>
+  <div class="key-row" id="row2">
+    <div class="key" data-val="q">q</div>
+    <div class="key" data-val="s">s</div>
+    <div class="key" data-val="d">d</div>
+    <div class="key" data-val="f">f</div>
+    <div class="key" data-val="g">g</div>
+    <div class="key" data-val="h">h</div>
+    <div class="key" data-val="j">j</div>
+    <div class="key" data-val="k">k</div>
+    <div class="key" data-val="l">l</div>
+    <div class="key" data-val="m">m</div>
   </div>
 
   <!-- Row 3: Shift + letters + backspace -->
-  <div class="row" id="row3">
-    <div class="key shift action" data-key="shift" id="shiftKey">⇧</div>
-    <div class="key" data-key="w">w</div>
-    <div class="key" data-key="x">x</div>
-    <div class="key" data-key="c">c</div>
-    <div class="key" data-key="v">v</div>
-    <div class="key" data-key="b">b</div>
-    <div class="key" data-key="n">n</div>
-    <div class="key" data-key="'">'</div>
-    <div class="key backspace action" data-key="backspace">⌫</div>
+  <div class="key-row" id="row3">
+    <div class="key shift-key" data-action="shift" id="shiftKey">⇧</div>
+    <div class="key" data-val="w">w</div>
+    <div class="key" data-val="x">x</div>
+    <div class="key" data-val="c">c</div>
+    <div class="key" data-val="v">v</div>
+    <div class="key" data-val="b">b</div>
+    <div class="key" data-val="n">n</div>
+    <div class="key" data-val="'">'</div>
+    <div class="key backspace-key" data-action="backspace">⌫</div>
   </div>
 
-  <!-- Bottom row -->
-  <div class="row" id="bottomRow">
-    <div class="key wide action" data-key="symbols">!#1</div>
-    <div class="key action" data-key="globe" id="globeKey">🌐</div>
-    <div class="key action" data-key=",">,</div>
-    <div class="key space" data-key="space">Français (FR)</div>
-    <div class="key action" data-key=".">.</div>
-    <div class="key wide action enter" data-key="enter">⏎</div>
+  <!-- Bottom row: !#1, 🌐, comma, space, period, search -->
+  <div class="key-row" id="bottomRow">
+    <div class="key wide action-key" data-action="symbols">!#1</div>
+    <div class="key action-key" data-action="globe" id="globeKey">🌐</div>
+    <div class="key action-key" data-val=",">,</div>
+    <div class="key space" data-action="space">
+      <span class="space-label" id="spaceLabel">Français (FR)</span>
+      <span class="mic-icon">🎤</span>
+    </div>
+    <div class="key action-key" data-val=".">.</div>
+    <div class="key enter-key" data-action="enter">🔍</div>
   </div>
 </div>
 
 <script>
-const input = document.getElementById('textInput');
-const modIndicator = document.getElementById('modIndicator');
-const shiftKey = document.getElementById('shiftKey');
+const input = document.createElement('input');
+input.type = 'text';
+input.id = 'hiddenInput';
+input.style.cssText = 'position:fixed;top:-999px;left:-999px;';
+document.body.appendChild(input);
+
 let shiftActive = false;
 let ctrlActive = false;
-let altActive = false;
-let fnActive = false;
 
-// Key press handler
-document.querySelectorAll('.key').forEach(key => {
-  key.addEventListener('mousedown', (e) => {
-    e.preventDefault();
-    const k = key.dataset.key;
-    key.classList.add('pressed');
+const WORDS = {
+  '': ['Bonjour','Bonsoir','Merci','Salut','Super','Ok'],
+  'b': ['Bonjour','Bonsoir','Bon','Bien'],
+  'f': ['F','Fix','For','Fait','Faire','First'],
+  's': ['Salut','Super','Solution','Soon'],
+  'j': ['Je','J\'ai','Jamais'],
+  'm': ['Mais','Merci','Mon','Ma'],
+  't': ['Tu','Tout','Très','Ton'],
+};
 
-    if (k === 'shift') {
-      shiftActive = !shiftActive;
-      updateShift();
-      updateSuggestions();
-      return;
-    }
-    if (k === 'backspace') {
-      input.value = input.value.slice(0, -1);
-      updateSuggestions();
-      return;
-    }
-    if (k === 'space') {
-      input.value += ' ';
-      updateSuggestions();
-      return;
-    }
-    if (k === 'enter') {
-      input.value += '\n';
-      return;
-    }
-    if (k === 'globe') {
-      // Toggle language
-      document.querySelector('.key.space').textContent = 
-        document.querySelector('.key.space').textContent === 'Français (FR)' ? 'English (US)' : 'Français (FR)';
-      return;
-    }
-    if (k === 'symbols') {
-      toggleSymbols();
-      return;
-    }
-    if (k === 'ctrl') {
-      ctrlActive = !ctrlActive;
-      updateModifiers();
-      return;
-    }
+function handleKey(el) {
+  el.classList.add('pressed');
+  const r = document.createElement('span');
+  r.className = 'ripple';
+  el.appendChild(r);
+  setTimeout(() => r.remove(), 250);
+  setTimeout(() => el.classList.remove('pressed'), 60);
 
-    // Regular character
-    let char = k;
-    if (shiftActive) char = k.toUpperCase();
-    input.value += char;
-    shiftActive = false;
+  const val = el.dataset.val;
+  const action = el.dataset.action;
+
+  if (action === 'shift') {
+    shiftActive = !shiftActive;
     updateShift();
-    updateSuggestions();
-  });
-
-  key.addEventListener('mouseup', () => {
-    key.classList.remove('pressed');
-  });
-  key.addEventListener('mouseleave', () => {
-    key.classList.remove('pressed');
-  });
-});
-
-// Long press for Ctrl
-let longPressTimer;
-document.querySelectorAll('.key.action').forEach(key => {
-  key.addEventListener('mousedown', () => {
-    const k = key.dataset.key;
-    if (k === 'globe') {
-      longPressTimer = setTimeout(() => {
-        ctrlActive = !ctrlActive;
-        updateModifiers();
-      }, 500);
-    }
-  });
-  key.addEventListener('mouseup', () => clearTimeout(longPressTimer));
-  key.addEventListener('mouseleave', () => clearTimeout(longPressTimer));
-});
-
-function updateShift() {
-  const keys = document.querySelectorAll('#row1 .key, #row2 .key, #row3 .key:not(.action)');
-  keys.forEach(k => {
-    if (shiftActive) {
-      k.textContent = k.dataset.key.toUpperCase();
-      k.style.fontSize = '20px';
-    } else {
-      k.textContent = k.dataset.key;
-      k.style.fontSize = '';
-    }
-  });
-  shiftKey.classList.toggle('active', shiftActive);
-  if (shiftActive) {
-    shiftKey.style.background = '#4A90D9';
-    shiftKey.style.color = '#fff';
-  } else {
-    shiftKey.style.background = '';
-    shiftKey.style.color = '';
+    return;
   }
-}
-
-function updateModifiers() {
-  modIndicator.classList.toggle('visible', ctrlActive || altActive || fnActive);
-  if (ctrlActive) {
-    modIndicator.textContent = 'CTRL ACTIF';
-    modIndicator.style.background = '#1a5c2a';
-    modIndicator.style.color = '#30D158';
-    document.getElementById('globeKey').classList.add('active');
-  } else {
-    modIndicator.classList.remove('visible');
-    document.getElementById('globeKey').classList.remove('active');
+  if (action === 'backspace') {
+    input.value = input.value.slice(0, -1);
+    updateCandidates();
+    return;
   }
-}
-
-function updateSuggestions() {
-  const text = input.value.toLowerCase();
-  const words = {
-    'b': ['Bonjour', 'Bonsoir', 'Bonsoir'],
-    'f': ['F', 'Fix', 'For', 'Fait', 'From', 'Faut', 'Faire', 'First'],
-    's': ['Salut', 'Super', 'Solution', 'Soon', 'Stop'],
-    '': ['Bonjour', 'Bonsoir', 'Merci', 'Ok', 'Oui', 'Non']
-  };
-  const suggestions = document.getElementById('suggestions');
-  const lastWord = text.split(' ').pop();
-  const sugs = words[lastWord] || words[''];
-  suggestions.innerHTML = sugs.slice(0, 3).map(w => 
-    `<div class="suggestion" onclick="insertWord(this)">${w}</div>`
-  ).join('') + '<div class="suggestion more">⋯</div>';
-}
-
-function insertWord(el) {
-  const words = input.value.split(' ');
-  words[words.length - 1] = el.textContent;
-  input.value = words.join(' ') + ' ';
-  updateSuggestions();
-}
-
-function toggleClipboard() {
-  document.getElementById('clipboardBar').classList.toggle('visible');
-}
-
-let symbolsVisible = false;
-function toggleSymbols() {
-  symbolsVisible = !symbolsVisible;
-  const rows = document.querySelectorAll('#row1, #row2, #row3');
-  const numRow = document.getElementById('numberRow');
-  const bottomRow = document.getElementById('bottomRow');
-
-  if (symbolsVisible) {
-    // Show symbols page 1
-    rows[0].innerHTML = ['+','×','÷','=','/','_','<','>','[',']'].map(k => 
-      `<div class="key" data-key="${k}">${k}</div>`
-    ).join('');
-    rows[1].innerHTML = ['!','@','#','€','%','^','&','*','(',')'].map(k => 
-      `<div class="key" data-key="${k}">${k}</div>`
-    ).join('');
-    rows[2].innerHTML = `
-      <div class="key wide action" data-key="symbols">1/2</div>
-      <div class="key" data-key="-">-</div>
-      <div class="key" data-key="'">'</div>
-      <div class="key" data-key="&quot;">"</div>
-      <div class="key" data-key=":">:</div>
-      <div class="key" data-key=";">;</div>
-      <div class="key" data-key=",">,</div>
-      <div class="key" data-key="?">?</div>
-      <div class="key backspace action" data-key="backspace">⌫</div>
-    `;
-    bottomRow.querySelector('[data-key="globe"]').textContent = 'ABC';
-    bottomRow.querySelector('[data-key="globe"]').dataset.key = 'symbols';
-  } else {
-    // Restore AZERTY
-    rows[0].innerHTML = ['a','z','e','r','t','y','u','i','o','p'].map(k => 
-      `<div class="key" data-key="${k}">${k}</div>`
-    ).join('');
-    rows[1].innerHTML = ['q','s','d','f','g','h','j','k','l','m'].map(k => 
-      `<div class="key" data-key="${k}">${k}</div>`
-    ).join('');
-    rows[2].innerHTML = `
-      <div class="key shift action" data-key="shift" id="shiftKey">⇧</div>
-      <div class="key" data-key="w">w</div>
-      <div class="key" data-key="x">x</div>
-      <div class="key" data-key="c">c</div>
-      <div class="key" data-key="v">v</div>
-      <div class="key" data-key="b">b</div>
-      <div class="key" data-key="n">n</div>
-      <div class="key" data-key="'">'</div>
-      <div class="key backspace action" data-key="backspace">⌫</div>
-    `;
-    bottomRow.querySelector('[data-key="symbols"]').textContent = '!#1';
-    bottomRow.querySelector('[data-key="symbols"]').dataset.key = 'symbols';
-    bottomRow.querySelector('[data-key="symbols"]').previousElementSibling.textContent = '🌐';
-    bottomRow.querySelector('[data-key="symbols"]').previousElementSibling.dataset.key = 'globe';
-    rebindKeys();
-    updateShift();
+  if (action === 'space') {
+    input.value += ' ';
+    updateCandidates();
+    return;
   }
-  rebindKeys();
-}
+  if (action === 'enter') {
+    alert('Search: ' + input.value);
+    return;
+  }
+  if (action === 'globe') {
+    const fr = document.getElementById('spaceLabel').textContent === 'Français (FR)';
+    document.getElementById('spaceLabel').textContent = fr ? 'English (US)' : 'Français (FR)';
+    return;
+  }
+  if (action === 'symbols') {
+    toggleSymbols();
+    return;
+  }
 
-function rebindKeys() {
-  document.querySelectorAll('.key').forEach(key => {
-    key.replaceWith(key.cloneNode(true));
-  });
-  // Rebind after clone
-  document.querySelectorAll('.key').forEach(key => {
-    key.addEventListener('mousedown', (e) => {
-      e.preventDefault();
-      const k = key.dataset.key;
-      key.classList.add('pressed');
-
-      if (k === 'shift') { shiftActive = !shiftActive; updateShift(); return; }
-      if (k === 'backspace') { input.value = input.value.slice(0, -1); updateSuggestions(); return; }
-      if (k === 'space') { input.value += ' '; updateSuggestions(); return; }
-      if (k === 'enter') { return; }
-      if (k === 'globe') { 
-        document.querySelector('.key.space').textContent = 
-          document.querySelector('.key.space').textContent === 'Français (FR)' ? 'English (US)' : 'Français (FR)';
-        return; 
-      }
-      if (k === 'symbols') { toggleSymbols(); return; }
-      let char = k;
-      if (shiftActive && k.length === 1) char = k.toUpperCase();
-      input.value += char;
+  if (val) {
+    const ch = shiftActive ? val.toUpperCase() : val;
+    input.value += ch;
+    if (shiftActive && !el.closest('.number-row')) {
       shiftActive = false;
       updateShift();
-      updateSuggestions();
-    });
-    key.addEventListener('mouseup', () => key.classList.remove('pressed'));
-    key.addEventListener('mouseleave', () => key.classList.remove('pressed'));
+    }
+    updateCandidates();
+  }
+}
+
+function updateShift() {
+  document.querySelectorAll('#row1 .key, #row2 .key, #row3 .key[data-val]').forEach(k => {
+    k.textContent = shiftActive ? k.dataset.val.toUpperCase() : k.dataset.val;
+  });
+  document.getElementById('shiftKey').classList.toggle('locked', shiftActive);
+}
+
+function updateCandidates() {
+  const strip = document.getElementById('candidates');
+  const last = input.value.split(/[\s]/).pop().toLowerCase();
+  const sugs = WORDS[last] || WORDS[''];
+  strip.innerHTML = `
+    <div class="c-collapse">⌨</div>
+    ${sugs.slice(0,3).map(w => `<div class="c-word" onclick="pickWord(this)">${w}</div>`).join('')}
+    <div class="c-more">⋯</div>
+  `;
+}
+
+function pickWord(el) {
+  const words = input.value.split(/(\s)/);
+  for (let i = words.length - 1; i >= 0; i--) {
+    if (words[i].trim()) { words[i] = el.textContent + ' '; break; }
+  }
+  input.value = words.join('');
+  updateCandidates();
+}
+
+let symPage = 1;
+const SYM = [
+  [['+','×','÷','=','/','_','<','>','[',']'],['!','@','#','€','%','^','&','*','(',')']],
+  [['`','~','\\','|','{','}','$','£','¥','₩'],['°','•','○','●','□','■','♤','♡','♢','♧']]
+];
+
+function toggleSymbols() {
+  if (document.getElementById('row1').querySelector('[data-val="a"]')) {
+    // Show symbols
+    const page = SYM[symPage - 1];
+    document.getElementById('row1').innerHTML = page[0].map(s => `<div class="key" data-val="${s}">${s}</div>`).join('');
+    document.getElementById('row2').innerHTML = page[1].map(s => `<div class="key" data-val="${s}">${s}</div>`).join('');
+    document.getElementById('row3').innerHTML = `
+      <div class="key wide action-key" data-action="symbols">${symPage}/2</div>
+      <div class="key" data-val="-">-</div>
+      <div class="key" data-val="'">'</div>
+      <div class="key" data-val='"'>"'</div>
+      <div class="key" data-val=":">:</div>
+      <div class="key" data-val=";">;</div>
+      <div class="key" data-val=",">,</div>
+      <div class="key" data-val="?">?</div>
+      <div class="key backspace-key" data-action="backspace">⌫</div>
+    `;
+    document.querySelector('#bottomRow [data-action="symbols"]').textContent = 'ABC';
+    document.querySelector('#bottomRow [data-action="symbols"]').dataset.action = 'backToAbc';
+  } else {
+    // Back to ABC
+    document.getElementById('row1').innerHTML = 'azertyuiop'.split('').map(c => `<div class="key" data-val="${c}">${c}</div>`).join('');
+    document.getElementById('row2').innerHTML = 'qsdfghjklm'.split('').map(c => `<div class="key" data-val="${c}">${c}</div>`).join('');
+    document.getElementById('row3').innerHTML = `
+      <div class="key shift-key" data-action="shift" id="shiftKey">⇧</div>
+      <div class="key" data-val="w">w</div>
+      <div class="key" data-val="x">x</div>
+      <div class="key" data-val="c">c</div>
+      <div class="key" data-val="v">v</div>
+      <div class="key" data-val="b">b</div>
+      <div class="key" data-val="n">n</div>
+      <div class="key" data-val="'">'</div>
+      <div class="key backspace-key" data-action="backspace">⌫</div>
+    `;
+    document.querySelector('#bottomRow [data-action="backToAbc"]').textContent = '!#1';
+    document.querySelector('#bottomRow [data-action="backToAbc"]').dataset.action = 'symbols';
+    updateShift();
+  }
+  bindKeys();
+}
+
+function bindKeys() {
+  document.querySelectorAll('.key').forEach(el => {
+    el.ontouchstart = (e) => { e.preventDefault(); handleKey(el); };
+    el.onmousedown = (e) => { e.preventDefault(); handleKey(el); };
   });
 }
+
+bindKeys();
+updateCandidates();
 </script>
 </body>
 </html>
