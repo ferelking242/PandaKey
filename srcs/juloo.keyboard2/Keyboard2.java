@@ -188,15 +188,13 @@ public class Keyboard2 extends InputMethodService
       get_imm().showInputMethodPicker());
   }
 
-  /** Toggle toolbar visibility: hide when candidates are showing. */
+  /** Toggle toolbar visibility: hide only when candidates are actually showing. */
   private void refresh_toolbar()
   {
     if (_toolbar_view == null) return;
-    boolean show_candidates =
-      _config.suggestions_enabled
-      && _config.editor_config.should_show_candidates_view
-      && !_config.split_layout;
-    _toolbar_view.setVisibility(show_candidates ? View.GONE : View.VISIBLE);
+    boolean candidates_visible =
+      _candidates_view.getVisibility() == View.VISIBLE;
+    _toolbar_view.setVisibility(candidates_visible ? View.GONE : View.VISIBLE);
   }
 
   InputMethodManager get_imm()

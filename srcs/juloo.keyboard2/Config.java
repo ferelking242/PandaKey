@@ -140,7 +140,7 @@ public final class Config
     }
     else
     {
-      keyboardHeightPercent = _prefs.getInt(foldable_unfolded ? "keyboard_height_unfolded" : "keyboard_height", 35);
+      keyboardHeightPercent = _prefs.getInt(foldable_unfolded ? "keyboard_height_unfolded" : "keyboard_height", 30);
     }
     layouts = LayoutsPreference.load_from_preferences(res, _prefs);
     inverse_numpad = _prefs.getString("numpad_layout", "default").equals("low_first");
@@ -163,7 +163,7 @@ public final class Config
     longPressTimeout = _prefs.getInt("longpress_timeout", 600);
     longPressInterval = _prefs.getInt("longpress_interval", 65);
     keyrepeat_enabled = _prefs.getBoolean("keyrepeat_enabled", true);
-    margin_bottom = get_dip_pref_oriented(dm, "margin_bottom", 7, 3);
+    margin_bottom = get_dip_pref_oriented(dm, "margin_bottom", 4, 2);
     key_vertical_margin = get_dip_pref(dm, "key_vertical_margin", 1.5f) / 100;
     key_horizontal_margin = get_dip_pref(dm, "key_horizontal_margin", 2) / 100;
     // Label brightness is used as the alpha channel
@@ -183,7 +183,7 @@ public final class Config
     float base_height = Math.min(dm.heightPixels, dm.widthPixels * 16.f / 9.f);
     keyboard_rows_height_pixels = (int)(base_height * keyboardHeightPercent / 395);
     horizontal_margin =
-      get_dip_pref_oriented(dm, "horizontal_margin", 3, 28);
+      get_dip_pref_oriented(dm, "horizontal_margin", 2, 20);
     double_tap_lock_shift = _prefs.getBoolean("lock_double_tap", false);
     characterSize =
       _prefs.getFloat("character_size", 1.15f)
