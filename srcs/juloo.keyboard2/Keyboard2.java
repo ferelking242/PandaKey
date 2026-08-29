@@ -171,6 +171,19 @@ public class Keyboard2 extends InputMethodService
   private void setup_toolbar()
   {
     if (_toolbar_view == null) return;
+    // Tint all toolbar icons with the theme's sublabel color
+    int iconColor = _config.theme == R.style.Light ? 0xFF666666 : 0xFF888888;
+    tint_toolbar_icon(R.id.tb_cursor, iconColor);
+    tint_toolbar_icon(R.id.tb_select, iconColor);
+    tint_toolbar_icon(R.id.tb_clipboard, iconColor);
+    tint_toolbar_icon(R.id.tb_translate, iconColor);
+    tint_toolbar_icon(R.id.tb_keyboard, iconColor);
+    tint_toolbar_icon(R.id.tb_more, iconColor);
+    // Cursor button -> show text editing mode
+    View cursorBtn = _toolbar_view.findViewById(R.id.tb_cursor);
+    if (cursorBtn != null) cursorBtn.setOnClickListener(v -> {
+      setSpecialLayout(loadNumpad(R.xml.greekmath));
+    });
     // Clipboard button -> switch to clipboard pane
     View clipBtn = _toolbar_view.findViewById(R.id.tb_clipboard);
     if (clipBtn != null) clipBtn.setOnClickListener(v -> {
@@ -186,15 +199,38 @@ public class Keyboard2 extends InputMethodService
     View kbBtn = _toolbar_view.findViewById(R.id.tb_keyboard);
     if (kbBtn != null) kbBtn.setOnClickListener(v ->
       get_imm().showInputMethodPicker());
+    // Select button -> select all
+    View selectBtn = _toolbar_view.findViewById(R.id.tb_select);
+    if (selectBtn != null) selectBtn.setOnClickListener(v -> {
+      InputConnection conn = getCurrentInputConnection();
+      if (conn != null) {
+        EditorInfo ei = getCurrentInputEditorInfo();
+        if (ei != null) conn.performEditorAction(ei.imeOptions & EditorInfo.IME_MASK_ACTION);
+      }
+    });
+    // Translate button -> open settings (placeholder)
+    View translateBtn = _toolbar_view.findViewById(R.id.tb_translate);
+    if (translateBtn != null) translateBtn.setOnClickListener(v ->
+      start_activity(SettingsActivity.class));
   }
 
-  /** Toggle toolbar visibility: hide only when candidates are actually showing. */
+  private void tint_toolbar_icon(int viewId, int color) {
+    View v = _toolbar_view.findViewById(viewId);
+    if (v instanceof android.widget.ImageView) {
+      android.graphics.drawable.Drawable d = ((android.widget.ImageView) v).getDrawable();
+      if (d != null) {
+        d = d.mutate();
+        d.setTint(color);
+        ((android.widget.ImageView) v).setImageDrawable(d);
+      }
+    }
+  }
+
+  /** Toolbar is always visible like Samsung keyboard. */
   private void refresh_toolbar()
   {
     if (_toolbar_view == null) return;
-    boolean candidates_visible =
-      _candidates_view.getVisibility() == View.VISIBLE;
-    _toolbar_view.setVisibility(candidates_visible ? View.GONE : View.VISIBLE);
+    _toolbar_view.setVisibility(View.VISIBLE);
   }
 
   InputMethodManager get_imm()
