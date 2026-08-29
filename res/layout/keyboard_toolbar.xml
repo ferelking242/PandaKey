@@ -1,87 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Samsung toolbar: 6 icons above keyboard, hidden when candidates visible -->
+<!-- Samsung-style toolbar: 6 icons, themed with keyboard background -->
 <LinearLayout
   xmlns:android="http://schemas.android.com/apk/res/android"
   android:id="@+id/keyboard_toolbar"
   android:layout_width="match_parent"
-  android:layout_height="36dp"
+  android:layout_height="40dp"
   android:orientation="horizontal"
   android:gravity="center_vertical"
-  android:paddingHorizontal="2dp"
-  android:background="@android:color/black">
+  android:paddingHorizontal="4dp"
+  android:background="?attr/colorKeyboard">
 
   <!-- 1. Cursor move -->
-  <TextView
+  <ImageView
     android:id="@+id/tb_cursor"
     android:layout_width="0dp"
-    android:layout_height="32dp"
+    android:layout_height="36dp"
     android:layout_weight="1"
-    android:gravity="center"
-    android:text="➍"
-    android:textSize="16sp"
-    android:textColor="#7A7A7A"
+    android:padding="6dp"
+    android:scaleType="centerInside"
+    android:src="@drawable/ic_toolbar_cursor"
     android:background="@android:color/transparent"/>
 
   <!-- 2. Text select -->
-  <TextView
+  <ImageView
     android:id="@+id/tb_select"
     android:layout_width="0dp"
-    android:layout_height="32dp"
+    android:layout_height="36dp"
     android:layout_weight="1"
-    android:gravity="center"
-    android:text="T"
-    android:textSize="16sp"
-    android:textStyle="bold"
-    android:textColor="#7A7A7A"
+    android:padding="6dp"
+    android:scaleType="centerInside"
+    android:src="@drawable/ic_toolbar_select"
     android:background="@android:color/transparent"/>
 
   <!-- 3. Clipboard -->
-  <TextView
+  <ImageView
     android:id="@+id/tb_clipboard"
     android:layout_width="0dp"
-    android:layout_height="32dp"
+    android:layout_height="36dp"
     android:layout_weight="1"
-    android:gravity="center"
-    android:text="❐"
-    android:textSize="16sp"
-    android:textColor="#7A7A7A"
+    android:padding="6dp"
+    android:scaleType="centerInside"
+    android:src="@drawable/ic_toolbar_clipboard"
     android:background="@android:color/transparent"/>
 
   <!-- 4. Translate -->
-  <TextView
+  <ImageView
     android:id="@+id/tb_translate"
     android:layout_width="0dp"
-    android:layout_height="32dp"
+    android:layout_height="36dp"
     android:layout_weight="1"
-    android:gravity="center"
-    android:text="A"
-    android:textSize="14sp"
-    android:textStyle="bold"
-    android:textColor="#7A7A7A"
+    android:padding="6dp"
+    android:scaleType="centerInside"
+    android:src="@drawable/ic_toolbar_translate"
     android:background="@android:color/transparent"/>
 
   <!-- 5. Keyboard switch -->
-  <TextView
+  <ImageView
     android:id="@+id/tb_keyboard"
     android:layout_width="0dp"
-    android:layout_height="32dp"
+    android:layout_height="36dp"
     android:layout_weight="1"
-    android:gravity="center"
-    android:text="⌨"
-    android:textSize="16sp"
-    android:textColor="#7A7A7A"
+    android:padding="6dp"
+    android:scaleType="centerInside"
+    android:src="@drawable/ic_toolbar_keyboard"
     android:background="@android:color/transparent"/>
 
-  <!-- 6. More (3 dots) -->
-  <TextView
+  <!-- 6. More (vertical dots) -->
+  <ImageView
     android:id="@+id/tb_more"
     android:layout_width="0dp"
-    android:layout_height="32dp"
+    android:layout_height="36dp"
     android:layout_weight="1"
-    android:gravity="center"
-    android:text="⋮"
-    android:textSize="18sp"
-    android:textColor="#7A7A7A"
+    android:padding="6dp"
+    android:scaleType="centerInside"
+    android:src="@drawable/ic_toolbar_more"
     android:background="@android:color/transparent"/>
 
 </LinearLayout>
